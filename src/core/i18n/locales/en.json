@@ -1,0 +1,239 @@
+{
+  "app": {
+    "name": "DiuMed",
+    "tagline": "Observe. Interpret. Act."
+  },
+  "onboarding": {
+    "step1": {
+      "title": "What DiuMed does",
+      "body": "Your phone's camera can observe optical signals from your skin. DiuMed helps you interpret them carefully — and know when to act.",
+      "note": "This is not a medical device."
+    },
+    "step2": {
+      "title": "What it can estimate",
+      "can": "Heart rate estimation (optical, experimental)",
+      "cannot": "DiuMed cannot diagnose illness, measure blood oxygen accurately, or replace clinical examination.",
+      "body": "Camera-based measurements are optical estimates. Accuracy depends on lighting, stillness, and skin tone. Results may not reflect true physiological values.",
+      "warning": "If you have urgent symptoms, call emergency services."
+    },
+    "step3": {
+      "title": "Privacy & Consent",
+      "body": "Your health data is stored in your account only. It is never sold, never shared without your consent. Camera processing happens entirely on your device.",
+      "consent": "I understand that DiuMed provides optical estimates, not medical diagnoses, and that I should seek emergency care for serious symptoms.",
+      "agree": "I understand — continue",
+      "decline": "Not now"
+    },
+    "next": "Continue",
+    "skip": "Skip"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "signOut": "Sign out",
+    "email": "Email address",
+    "password": "Password",
+    "fullName": "Full name",
+    "signingIn": "Signing in...",
+    "creatingAccount": "Creating account...",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "No account yet?",
+    "hasAccount": "Already have an account?",
+    "errors": {
+      "invalidCredentials": "Invalid email or password.",
+      "emailInUse": "An account with this email already exists.",
+      "weakPassword": "Password must be at least 8 characters.",
+      "emailNotConfirmed": "Please verify your email address before signing in.",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "bioAura": "Bio-Aura",
+    "triage": "Triage",
+    "records": "Records",
+    "profile": "Profile"
+  },
+  "home": {
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening",
+      "night": "Good night"
+    },
+    "question": "How do you feel today?",
+    "actions": {
+      "measure": "Check signal",
+      "triage": "Check symptoms",
+      "emergency": "Emergency"
+    },
+    "recentActivity": "Recent activity",
+    "noRecords": "No measurements yet.",
+    "noRecordsHint": "Your first Bio-Aura reading will appear here.",
+    "privacy": "Data is stored securely in your account only."
+  },
+  "bioAura": {
+    "title": "Bio-Aura",
+    "subtitle": "Optical vital estimation",
+    "disclaimer": "Experimental optical estimate — not a medical reading.",
+    "states": {
+      "idle": "Ready to measure",
+      "requestingCamera": "Requesting camera access...",
+      "cameraReady": "Camera ready",
+      "findingFace": "Position your face inside the frame",
+      "capturing": "Capturing optical signal...",
+      "signalPoor": "Signal too weak. Improve lighting and hold still.",
+      "movementDetected": "Movement detected. Hold still.",
+      "measuring": "Processing measurement...",
+      "success": "Measurement complete",
+      "failed": "No reliable signal detected.",
+      "stopped": "Measurement stopped"
+    },
+    "guidance": {
+      "closer": "Move slightly closer.",
+      "farther": "Move slightly back.",
+      "light": "Move to a brighter area.",
+      "still": "Hold still.",
+      "center": "Center your face in the frame."
+    },
+    "noSignal": {
+      "title": "NO SIGNAL",
+      "body": "Move into better light and hold still.",
+      "hint": "No BPM recorded."
+    },
+    "result": {
+      "bpm": "BPM",
+      "quality": "Signal quality",
+      "confidence": "Confidence",
+      "duration": "Duration",
+      "source": "Source",
+      "save": "Save measurement",
+      "retake": "Measure again",
+      "disclaimer": "Optical estimate — not a medical diagnosis."
+    },
+    "diagnostics": "Diagnostics",
+    "permissionDenied": "Camera access denied. Please enable camera permissions in your browser settings.",
+    "noCameraFound": "No camera detected on this device."
+  },
+  "records": {
+    "title": "Records",
+    "empty": "No records yet.",
+    "emptyHint": "Measurements you save will appear here.",
+    "detail": {
+      "title": "Measurement detail",
+      "disclaimer": "Optical estimate — not a medical diagnosis.",
+      "value": "Value",
+      "quality": "Quality",
+      "confidence": "Confidence",
+      "duration": "Duration",
+      "source": "Source",
+      "algorithm": "Algorithm",
+      "timestamp": "Captured at"
+    },
+    "syncStatus": {
+      "online": "Online",
+      "offline": "Offline",
+      "syncing": "Syncing...",
+      "synced": "Synced",
+      "failed": "Sync failed"
+    }
+  },
+  "triage": {
+    "title": "Symptom check",
+    "subtitle": "Describe what you are experiencing.",
+    "placeholder": "Describe your symptoms...",
+    "submit": "Check symptoms",
+    "checking": "Checking...",
+    "source": {
+      "offline": "Offline rule engine",
+      "online": "AI assistance"
+    },
+    "severity": {
+      "LOW": "Low concern",
+      "MEDIUM": "Moderate concern",
+      "HIGH": "High concern",
+      "CRITICAL": "Critical — seek immediate care",
+      "UNKNOWN": "Unable to assess"
+    },
+    "limitations": "This is not a medical diagnosis. It is a general guidance based on the symptoms you described.",
+    "emergencyWarning": "If you believe this is a medical emergency, call emergency services immediately.",
+    "noInput": "Please describe your symptoms.",
+    "error": "Could not process your symptoms. Please try again."
+  },
+  "emergency": {
+    "title": "Emergency",
+    "subtitle": "For immediate medical emergencies",
+    "warning": "Only use if you or someone is in immediate danger.",
+    "call112": "Call 112",
+    "callCustom": "Call emergency contact",
+    "smsCustom": "Text emergency contact",
+    "states": {
+      "ready": "Ready",
+      "initiating": "Initiating...",
+      "deviceHandoff": "Your phone is opening the emergency action.",
+      "returned": "Action attempted.",
+      "unverifiable": "Unable to confirm if action completed."
+    },
+    "noContact": "No emergency contact saved.",
+    "addContact": "Add in Profile",
+    "disclaimer": "DiuMed cannot dispatch emergency services. It can only initiate a call or message on your device."
+  },
+  "profile": {
+    "title": "Profile",
+    "name": "Full name",
+    "language": "Language",
+    "dob": "Date of birth",
+    "sex": "Sex",
+    "emergencyContact": "Emergency contact",
+    "emergencyContactName": "Contact name",
+    "emergencyContactPhone": "Contact phone",
+    "save": "Save changes",
+    "saving": "Saving...",
+    "saved": "Saved",
+    "consent": "Consent & Privacy",
+    "revokeConsent": "Revoke consent",
+    "signOut": "Sign out",
+    "danger": "Account",
+    "languages": {
+      "en": "English",
+      "ta": "தமிழ்",
+      "hi": "हिन्दी"
+    },
+    "sexOptions": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "prefer_not_to_say": "Prefer not to say"
+    }
+  },
+  "admin": {
+    "title": "Operations",
+    "metrics": {
+      "users": "Registered users",
+      "measurementsToday": "Measurements today",
+      "measurementsTotal": "Measurements total",
+      "triageSessions": "Triage sessions",
+      "emergencyEvents": "Emergency events"
+    },
+    "noAccess": "Access restricted.",
+    "noAccessHint": "This area is for authorized administrators only."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong.",
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "close": "Close",
+    "back": "Back",
+    "noData": "No data available.",
+    "unknown": "Unknown",
+    "notAvailable": "N/A",
+    "optional": "Optional"
+  },
+  "sync": {
+    "online": "Online",
+    "offline": "Offline — data will sync when reconnected",
+    "syncing": "Syncing...",
+    "synced": "Synced",
+    "failed": "Sync failed — will retry"
+  }
+}

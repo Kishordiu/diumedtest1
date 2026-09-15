@@ -1,0 +1,30 @@
+{
+  "hb_estimator": {
+    "name": "hb_estimator",
+    "type": "linear",
+    "weights": [
+      8.994213571973638
+    ],
+    "bias": 4.477227051942548
+  },
+  "jaundice_classifier": {
+    "name": "jaundice_classifier",
+    "type": "logistic",
+    "weights": [
+      -0.06388612102548595,
+      0.017855093285568766,
+      0.005608915882665486
+    ],
+    "bias": 5.952756688056733
+  },
+  "hr_calibration": {
+    "name": "hr_calibration",
+    "type": "linear",
+    "weights": [
+      1.0453497841700494,
+      -0.002190087753027195,
+      -0.022505670324987553
+    ],
+    "bias": 0.7482977386051317
+  }
+}

@@ -1,0 +1,11 @@
+numpy
+scipy
+pandas
+scikit-learn
+opencv-python
+wfdb
+mediapipe
+matplotlib
+tqdm
+pytest
+pyyaml

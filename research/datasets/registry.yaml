@@ -1,0 +1,573 @@
+# DiuMed Dataset Registry
+# Every dataset used in research or production MUST be registered here.
+# Fields follow the specification in docs/TRAINING_DATA_PROVENANCE.md.
+
+# ============================================================
+# GROUP A: REMOTE CAMERA rPPG
+# ============================================================
+
+- name: UBFC-rPPG
+  modality: remote_rppg
+  source_url: https://sites.google.com/view/yaboreau/ubfcrppg
+  license: Research use
+  access_type: open_download
+  subjects: 42
+  recordings: 42
+  sampling_rate: 30fps
+  sensor_type: webcam
+  camera_type: Logitech C920
+  ground_truth_type: pulse_oximeter
+  ground_truth_reference: CMS50E
+  motion_conditions: minimal (seated)
+  illumination_conditions: indoor, variable
+  demographics: mixed
+  clinical_population: healthy
+  directly_representative_of_phone_camera: false
+  recommended_use: primary rPPG train/test
+  not_recommended_for: mobile-specific validation
+  citation: "Bobbia et al. (2019). Unsupervised skin tissue segmentation for remote photoplethysmography. Pattern Recognition Letters."
+  download_status: not_downloaded
+
+- name: PURE
+  modality: remote_rppg
+  source_url: https://www.tu-ilmenau.de/neurob/data-sets-code/pure-dataset
+  license: Research use
+  access_type: open_download
+  subjects: 10
+  recordings: 60
+  sampling_rate: 30fps
+  sensor_type: webcam
+  camera_type: eco274CVGE (IDS)
+  ground_truth_type: pulse_oximeter
+  ground_truth_reference: CMS50E
+  motion_conditions: 6 conditions (steady, talking, slow/fast translation, small/medium rotation)
+  illumination_conditions: indoor
+  demographics: mixed
+  clinical_population: healthy
+  directly_representative_of_phone_camera: false
+  recommended_use: algorithm development, motion robustness
+  not_recommended_for: mobile-specific validation
+  citation: "Stricker et al. (2014). Non-contact Video-based Pulse Rate Measurement on a Mobile Service Robot."
+  download_status: not_downloaded
+
+- name: VIPL-HR
+  modality: remote_rppg
+  source_url: http://vipl.ict.ac.cn/view_database.php?id=15
+  license: Research use (restricted)
+  access_type: application_required
+  subjects: 107
+  recordings: 2378
+  sampling_rate: variable
+  sensor_type: multiple (webcam, phone, tablet)
+  camera_type: multiple
+  ground_truth_type: pulse_oximeter
+  ground_truth_reference: BVP sensor
+  motion_conditions: head movement, talking
+  illumination_conditions: variable (indoor/outdoor)
+  demographics: Chinese subjects
+  clinical_population: healthy
+  directly_representative_of_phone_camera: partially (includes phone recordings)
+  recommended_use: cross-condition testing, large-scale evaluation
+  not_recommended_for: initial development (too large, restricted)
+  citation: "Niu et al. (2019). VIPL-HR: A Multi-Modal Database for Pulse Estimation from Less-Constrained Face Video."
+  download_status: not_applied
+
+- name: VIPL-HR-V2
+  modality: remote_rppg
+  source_url: http://vipl.ict.ac.cn/
+  license: Research use (restricted)
+  access_type: application_required
+  subjects: 500
+  recordings: 2500
+  sampling_rate: variable
+  sensor_type: multiple
+  camera_type: multiple
+  ground_truth_type: pulse_oximeter
+  ground_truth_reference: BVP sensor
+  motion_conditions: variable
+  illumination_conditions: variable
+  demographics: diverse
+  clinical_population: healthy
+  directly_representative_of_phone_camera: partially
+  recommended_use: large-scale cross-dataset validation
+  not_recommended_for: initial development
+  citation: "Niu et al. VIPL-HR-V2"
+  download_status: not_applied
+
+- name: UBFC-Phys
+  modality: remote_rppg
+  source_url: https://sites.google.com/view/yaboreau/ubfc-phys
+  license: Research use
+  access_type: open_download
+  subjects: 56
+  recordings: 168
+  sampling_rate: 35fps
+  sensor_type: webcam
+  camera_type: Logitech C920
+  ground_truth_type: BVP + EDA + temperature
+  ground_truth_reference: Empatica E4
+  motion_conditions: stress tasks
+  illumination_conditions: indoor
+  demographics: mixed
+  clinical_population: healthy (stress conditions)
+  directly_representative_of_phone_camera: false
+  recommended_use: physiological variation, stress robustness
+  not_recommended_for: mobile-specific validation
+  citation: "Sabour et al. (2021). UBFC-Phys: A Multimodal Database For Psychophysiological Studies."
+  download_status: not_downloaded
+
+- name: COHFACE
+  modality: remote_rppg
+  source_url: https://www.idiap.ch/en/dataset/cohface
+  license: Research use
+  access_type: open_download
+  subjects: 40
+  recordings: 160
+  sampling_rate: 20fps
+  sensor_type: webcam
+  camera_type: Logitech HD C525
+  ground_truth_type: pulse_oximeter + respiration
+  ground_truth_reference: BVP + respiration belt
+  motion_conditions: minimal
+  illumination_conditions: 2 conditions (natural, studio)
+  demographics: mixed
+  clinical_population: healthy
+  directly_representative_of_phone_camera: false
+  recommended_use: cross-dataset evaluation
+  not_recommended_for: primary training
+  citation: "Heusch et al. (2017). A Reproducible Study on Remote Heart Rate Measurement."
+  download_status: not_downloaded
+
+- name: MMSE-HR
+  modality: remote_rppg
+  source_url: restricted
+  license: Research use (restricted)
+  access_type: application_required
+  subjects: 40
+  recordings: 102
+  sampling_rate: 25fps
+  sensor_type: webcam
+  camera_type: Point Grey FL3
+  ground_truth_type: pulse_oximeter
+  ground_truth_reference: BP monitor
+  motion_conditions: spontaneous expressions
+  illumination_conditions: controlled
+  demographics: diverse skin tones
+  clinical_population: healthy
+  directly_representative_of_phone_camera: false
+  recommended_use: heterogeneous facial video, skin tone variation
+  not_recommended_for: mobile-specific validation
+  citation: "Tulyakov et al. (2016). Self-Adaptive Matrix Completion for Heart Rate Estimation."
+  download_status: not_applied
+
+- name: MMPD
+  modality: remote_rppg
+  source_url: https://github.com/McJackTang/MMPD_rPPG_dataset
+  license: Research use
+  access_type: open_download
+  subjects: 33
+  recordings: 660
+  sampling_rate: 30fps
+  sensor_type: smartphone
+  camera_type: multiple Android/iOS phones
+  ground_truth_type: pulse_oximeter
+  ground_truth_reference: HKG-07C+
+  motion_conditions: 4 conditions
+  illumination_conditions: 4 conditions (LED, incandescent, natural, dark)
+  demographics: diverse skin tones (Fitzpatrick I-VI)
+  clinical_population: healthy
+  directly_representative_of_phone_camera: true
+  recommended_use: "PRIMARY — mobile-device conditions, skin tone variation"
+  not_recommended_for: nothing (highly relevant)
+  citation: "Tang et al. (2023). MMPD: Multi-Domain Mobile Video Physiology Dataset."
+  download_status: not_downloaded
+
+- name: iBVP
+  modality: remote_rppg
+  source_url: restricted
+  license: Research use (restricted)
+  access_type: application_required
+  subjects: 44
+  recordings: unknown
+  sampling_rate: variable
+  sensor_type: webcam
+  camera_type: unknown
+  ground_truth_type: BVP
+  ground_truth_reference: contact sensor
+  motion_conditions: variable
+  illumination_conditions: variable
+  demographics: unknown
+  clinical_population: healthy
+  directly_representative_of_phone_camera: false
+  recommended_use: cross-dataset testing
+  not_recommended_for: primary training
+  citation: "Joshi & Cho. iBVP Dataset."
+  download_status: not_applied
+
+- name: SCAMPS
+  modality: remote_rppg_synthetic
+  source_url: https://github.com/danmcduff/scampsTutorial
+  license: Open
+  access_type: open_download
+  subjects: synthetic
+  recordings: 2800
+  sampling_rate: 30fps
+  sensor_type: synthetic
+  camera_type: rendered
+  ground_truth_type: synthetic PPG waveform
+  ground_truth_reference: generated
+  motion_conditions: synthetic variation
+  illumination_conditions: synthetic variation
+  demographics: synthetic skin tones
+  clinical_population: N/A
+  directly_representative_of_phone_camera: false
+  recommended_use: large-scale pretraining, augmentation research
+  not_recommended_for: real-world accuracy validation
+  citation: "McDuff et al. (2022). SCAMPS: Synthetics for Camera Measurement of Physiological Signals."
+  download_status: not_downloaded
+
+- name: MAHNOB-HCI
+  modality: remote_rppg
+  source_url: https://mahnob-db.eu/hci-tagging/
+  license: Research use (restricted)
+  access_type: application_required
+  subjects: 27
+  recordings: 527
+  sampling_rate: variable
+  sensor_type: webcam
+  camera_type: multiple
+  ground_truth_type: ECG + physiology
+  ground_truth_reference: biosignal sensors
+  motion_conditions: naturalistic
+  illumination_conditions: controlled
+  demographics: mixed
+  clinical_population: healthy
+  directly_representative_of_phone_camera: false
+  recommended_use: independent evaluation
+  not_recommended_for: primary training
+  citation: "Soleymani et al. (2012). A Multimodal Database for Affect Recognition and Implicit Tagging."
+  download_status: not_applied
+
+- name: BP4D+
+  modality: remote_rppg_auxiliary
+  source_url: http://www.cs.binghamton.edu/~lijun/Research/3DFE/3DFE_Analysis.html
+  license: Research use (restricted, institutional)
+  access_type: application_required
+  subjects: 140
+  recordings: unknown
+  sampling_rate: variable
+  sensor_type: multiple (RGB, NIR, thermal)
+  camera_type: multiple
+  ground_truth_type: physiological signals
+  ground_truth_reference: contact sensors
+  motion_conditions: spontaneous expressions
+  illumination_conditions: controlled
+  demographics: diverse
+  clinical_population: healthy
+  directly_representative_of_phone_camera: false
+  recommended_use: facial variability research (cautious)
+  not_recommended_for: smartphone rPPG validation
+  citation: "Zhang et al. BP4D+ Database."
+  download_status: not_applied
+
+# ============================================================
+# GROUP B: SMARTPHONE CONTACT PPG
+# ============================================================
+
+- name: BUT PPG
+  modality: smartphone_contact_ppg
+  source_url: https://physionet.org/content/butppg/
+  license: PhysioNet Restricted Health Data License
+  access_type: physionet_credentialed
+  subjects: unknown (thousands of recordings)
+  recordings: thousands
+  sampling_rate: smartphone camera fps
+  sensor_type: smartphone_camera
+  camera_type: smartphone rear camera
+  ground_truth_type: ECG
+  ground_truth_reference: simultaneous ECG recording
+  motion_conditions: variable
+  illumination_conditions: torch-illuminated
+  demographics: unknown
+  clinical_population: mixed
+  directly_representative_of_phone_camera: true
+  recommended_use: "PRIMARY — smartphone PPG signal quality + HR estimation"
+  not_recommended_for: nothing (highly relevant)
+  citation: "Novotny et al. BUT PPG Dataset."
+  download_status: not_downloaded
+
+- name: Welltory PPG
+  modality: smartphone_contact_ppg
+  source_url: https://github.com/Welltory/hrv-covid19
+  license: Open
+  access_type: open_download
+  subjects: variable
+  recordings: variable
+  sampling_rate: smartphone camera fps
+  sensor_type: smartphone_camera
+  camera_type: smartphone rear camera (finger over lens)
+  ground_truth_type: reference HR
+  ground_truth_reference: smartphone-derived
+  motion_conditions: resting
+  illumination_conditions: torch-illuminated
+  demographics: unknown
+  clinical_population: mixed
+  directly_representative_of_phone_camera: true
+  recommended_use: "PRIMARY — mobile contact PPG validation"
+  not_recommended_for: nothing
+  citation: "Welltory. HRV COVID-19 Dataset."
+  download_status: not_downloaded
+
+- name: BIDMC PPG
+  modality: clinical_ppg
+  source_url: https://physionet.org/content/bidmc/
+  license: PhysioNet Open Data
+  access_type: physionet_open
+  subjects: 53
+  recordings: 53
+  sampling_rate: 125Hz
+  sensor_type: clinical_pulse_oximeter
+  camera_type: N/A
+  ground_truth_type: ECG + respiration
+  ground_truth_reference: clinical monitors
+  motion_conditions: ICU (minimal)
+  illumination_conditions: N/A
+  demographics: mixed
+  clinical_population: ICU patients
+  directly_representative_of_phone_camera: false
+  recommended_use: signal processing validation, respiration
+  not_recommended_for: smartphone camera validation
+  citation: "Pimentel et al. (2017). Toward a Robust Estimation of Respiratory Rate from Pulse Oximeters."
+  download_status: not_downloaded
+
+- name: Wrist PPG During Exercise
+  modality: wrist_ppg
+  source_url: https://physionet.org/content/wrist/
+  license: PhysioNet Open Data
+  access_type: physionet_open
+  subjects: 8
+  recordings: 8
+  sampling_rate: variable
+  sensor_type: wrist_ppg_sensor
+  camera_type: N/A
+  ground_truth_type: ECG
+  ground_truth_reference: chest strap
+  motion_conditions: exercise (heavy motion)
+  illumination_conditions: N/A
+  demographics: unknown
+  clinical_population: healthy athletes
+  directly_representative_of_phone_camera: false
+  recommended_use: motion/noise robustness only
+  not_recommended_for: smartphone camera validation
+  citation: "Jarchi & Casson (2017). Description of a Database Containing Wrist PPG Signals."
+  download_status: not_downloaded
+
+# ============================================================
+# GROUP C: CLINICAL PPG (Representation Pretraining)
+# ============================================================
+
+- name: MIMIC-III Waveform Matched Subset
+  modality: clinical_ppg
+  source_url: https://physionet.org/content/mimic3wdb-matched/
+  license: PhysioNet Credentialed Health Data License
+  access_type: physionet_credentialed
+  subjects: thousands
+  recordings: thousands
+  sampling_rate: 125Hz
+  sensor_type: clinical_monitors
+  camera_type: N/A
+  ground_truth_type: ECG + ABP + PPG
+  ground_truth_reference: ICU monitors
+  motion_conditions: ICU
+  illumination_conditions: N/A
+  demographics: mixed
+  clinical_population: ICU patients
+  directly_representative_of_phone_camera: false
+  recommended_use: PPG representation learning, noise augmentation, morphology
+  not_recommended_for: "smartphone camera model validation — DO NOT claim equivalence"
+  citation: "Johnson et al. (2016). MIMIC-III, a freely accessible critical care database."
+  download_status: not_downloaded
+
+- name: MIMIC-III-Ext-PPG
+  modality: clinical_ppg
+  source_url: physionet
+  license: PhysioNet Credentialed
+  access_type: physionet_credentialed
+  subjects: thousands
+  recordings: thousands
+  sampling_rate: 125Hz
+  sensor_type: clinical
+  camera_type: N/A
+  ground_truth_type: quality labels + physiological signals
+  ground_truth_reference: clinical
+  motion_conditions: ICU
+  illumination_conditions: N/A
+  demographics: mixed
+  clinical_population: ICU patients
+  directly_representative_of_phone_camera: false
+  recommended_use: PPG quality classifier training
+  not_recommended_for: "phone camera validation"
+  citation: "MIMIC-III Extended PPG Benchmark."
+  download_status: not_downloaded
+
+- name: MIMIC-IV Waveform
+  modality: clinical_ppg
+  source_url: https://physionet.org/content/mimic4wdb/
+  license: PhysioNet Credentialed
+  access_type: physionet_credentialed
+  subjects: thousands
+  recordings: thousands
+  sampling_rate: variable
+  sensor_type: clinical
+  camera_type: N/A
+  ground_truth_type: ECG + PPG + ABP
+  ground_truth_reference: clinical
+  motion_conditions: ICU
+  illumination_conditions: N/A
+  demographics: mixed
+  clinical_population: ICU patients
+  directly_representative_of_phone_camera: false
+  recommended_use: additional waveform variation, pretraining
+  not_recommended_for: phone camera validation
+  citation: "MIMIC-IV Waveform Database."
+  download_status: not_downloaded
+
+# ============================================================
+# GROUP E: CONJUNCTIVAL Hb (Anemia)
+# ============================================================
+
+- name: Zenodo 8277462
+  modality: conjunctival_hb
+  source_url: https://zenodo.org/record/8277462
+  license: Open Access (Creative Commons)
+  access_type: open_download
+  subjects: 426
+  recordings: 426
+  sampling_rate: single_image
+  sensor_type: smartphone_camera
+  camera_type: smartphone (variable)
+  ground_truth_type: laboratory_hemoglobin
+  ground_truth_reference: CBC
+  motion_conditions: N/A
+  illumination_conditions: clinical (ED)
+  demographics: mixed
+  clinical_population: ED patients
+  directly_representative_of_phone_camera: true
+  recommended_use: "PRIMARY — conjunctival Hb estimation"
+  not_recommended_for: general purpose image classification
+  citation: "Zhao L, Jay G (2023). Prediction of Severe Anemia Using Smartphone Camera Conjunctival Images."
+  download_status: downloaded_and_used
+
+- name: Eyes Defy Anemia
+  modality: conjunctival_hb
+  source_url: https://www.kaggle.com/datasets/harshwardhanfartale/eyes-defy-anemia (also IEEE Dataport)
+  license: Unknown (Needs verification)
+  access_type: open_download
+  subjects: Unknown
+  recordings: Unknown
+  sampling_rate: single_image
+  sensor_type: camera
+  camera_type: variable
+  ground_truth_type: hemoglobin_classification
+  ground_truth_reference: Unknown
+  motion_conditions: N/A
+  illumination_conditions: variable
+  demographics: Unknown
+  clinical_population: Unknown
+  directly_representative_of_phone_camera: true
+  recommended_use: "Candidate — conjunctival Hb classification/estimation"
+  not_recommended_for: None yet
+  citation: "Unknown"
+  download_status: not_downloaded
+
+- name: Palpebral Conjunctiva to Detect Anaemia
+  modality: conjunctival_hb
+  source_url: https://www.kaggle.com/datasets/guptajanavi/palpebral-conjunctiva-to-detect-anaemia
+  license: Unknown
+  access_type: open_download
+  subjects: Unknown
+  recordings: Unknown
+  sampling_rate: single_image
+  sensor_type: camera
+  camera_type: variable
+  ground_truth_type: classification
+  ground_truth_reference: Unknown
+  motion_conditions: N/A
+  illumination_conditions: variable
+  demographics: Unknown
+  clinical_population: Unknown
+  directly_representative_of_phone_camera: true
+  recommended_use: "Candidate — additional conjunctiva examples"
+  not_recommended_for: None yet
+  citation: "Unknown"
+  download_status: not_downloaded
+
+- name: AnemiaDataset
+  modality: conjunctival_hb
+  source_url: https://www.kaggle.com/datasets/nahiyan1402/anemiadataset
+  license: Unknown
+  access_type: open_download
+  subjects: Unknown
+  recordings: Unknown
+  sampling_rate: single_image
+  sensor_type: camera
+  camera_type: variable
+  ground_truth_type: Unknown
+  ground_truth_reference: Unknown
+  motion_conditions: N/A
+  illumination_conditions: variable
+  demographics: Unknown
+  clinical_population: Unknown
+  directly_representative_of_phone_camera: true
+  recommended_use: "Candidate — dataset exploration"
+  not_recommended_for: None yet
+  citation: "Unknown"
+  download_status: not_downloaded
+
+# ============================================================
+# GROUP F: SCLERA / EYE COLOR (Jaundice)
+# ============================================================
+
+- name: Jaundice Image Data
+  modality: sclera_color
+  source_url: https://www.kaggle.com/datasets/aiolapo/jaundice-image-data
+  license: Unknown
+  access_type: open_download
+  subjects: Unknown
+  recordings: Unknown
+  sampling_rate: single_image
+  sensor_type: camera
+  camera_type: variable
+  ground_truth_type: classification
+  ground_truth_reference: Unknown
+  motion_conditions: N/A
+  illumination_conditions: variable
+  demographics: Unknown
+  clinical_population: Unknown
+  directly_representative_of_phone_camera: true
+  recommended_use: "Candidate — sclera color and jaundice classification"
+  not_recommended_for: None yet
+  citation: "Unknown"
+  download_status: not_downloaded
+
+- name: Bilirubin Quantification
+  modality: sclera_color
+  source_url: https://github.com/shreyann7/Bilirubin-Quantification-and-Jaundice-Prediction
+  license: Unknown
+  access_type: open_download
+  subjects: Unknown
+  recordings: Unknown
+  sampling_rate: single_image
+  sensor_type: camera
+  camera_type: variable
+  ground_truth_type: bilirubin
+  ground_truth_reference: Unknown
+  motion_conditions: N/A
+  illumination_conditions: variable
+  demographics: Unknown
+  clinical_population: Unknown
+  directly_representative_of_phone_camera: true
+  recommended_use: "Candidate — bilirubin methodology and data"
+  not_recommended_for: None yet
+  citation: "Unknown"
+  download_status: not_downloaded

@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   DiuMed Global CSS
+   Mineral black · Warm pearl · Signal teal
+   ============================================= */
+
+:root {
+  --color-mineral-black: #0D1012;
+  --color-deep-graphite: #171B1E;
+  --color-warm-pearl: #F5F2EA;
+  --color-soft-bone: #E9E4DA;
+  --color-stone: #A7A39A;
+  --color-muted-slate: #697177;
+  --color-signal-teal: #53B7A8;
+  --color-signal-amber: #D8A94D;
+  --color-emergency-red: #D85A52;
+  
+  --bg-gradient-1: rgba(83, 183, 168, 0.03);
+  --bg-gradient-2: rgba(216, 169, 77, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.05);
+
+  /* Safe areas */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  
+  /* Nav bar height */
+  --nav-height: 64px;
+  --top-bar-height: 56px;
+}
+
+:root.theme-warm {
+  /* Invert theme: dark backgrounds become warm light, light text becomes dark */
+  --color-mineral-black: #F4EFE6;
+  --color-deep-graphite: #EAE3D5;
+  --color-warm-pearl: #1A1A1A;
+  --color-soft-bone: #2D2D2D;
+  --color-stone: #6B6B6B;
+  --color-muted-slate: #8F8F8F;
+  --color-signal-teal: #3C8F80;
+  
+  --bg-gradient-1: rgba(216, 169, 77, 0.08);
+  --bg-gradient-2: rgba(216, 90, 82, 0.05);
+  --glass-border: rgba(0, 0, 0, 0.05);
+}
+
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@keyframes bgBreathe {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  background-color: var(--color-mineral-black);
+  background-image: 
+    radial-gradient(circle at 15% 50%, var(--bg-gradient-1), transparent 30%),
+    radial-gradient(circle at 85% 30%, var(--bg-gradient-2), transparent 30%);
+  background-size: 200% 200%;
+  animation: bgBreathe 15s ease infinite;
+  background-attachment: fixed;
+  color: var(--color-warm-pearl);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+#root {
+  min-height: 100dvh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove default button styles */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Focus visible — accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-signal-teal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* =============================================
+   Instrument readout typography
+   ============================================= */
+.readout {
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* =============================================
+   Surface classes
+   ============================================= */
+.surface-base {
+  background-color: var(--color-mineral-black);
+}
+
+.surface-raised {
+  background-color: var(--color-deep-graphite);
+}
+
+.surface-measure {
+  background-color: rgba(83, 183, 168, 0.08);
+  border: 1px solid rgba(83, 183, 168, 0.2);
+}
+
+.surface-warning {
+  background-color: rgba(216, 169, 77, 0.08);
+  border: 1px solid rgba(216, 169, 77, 0.2);
+}
+
+.surface-emergency {
+  background-color: rgba(216, 90, 82, 0.08);
+  border: 1px solid rgba(216, 90, 82, 0.2);
+}
+
+/* =============================================
+   Scrollbar — minimal styling
+   ============================================= */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-muted-slate);
+  border-radius: 2px;
+}
+
+/* =============================================
+   Reduced motion
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =============================================
+   Utility: hide scrollbar but keep scroll
+   ============================================= */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* =============================================
+   Camera overlay specifics
+   ============================================= */
+.camera-viewport {
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.camera-viewport video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =============================================
+   Signal animation
+   ============================================= */
+@keyframes signalPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.015); }
+}
+
+@keyframes scanLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.animate-signal-pulse {
+  animation: signalPulse 2.4s ease-in-out infinite;
+}
+
+.animate-scan-line {
+  animation: scanLine 2s linear infinite;
+}
+
+/* =============================================
+   Page transitions
+   ============================================= */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+/* =============================================
+   Bottom nav safe area
+   ============================================= */
+.bottom-nav {
+  padding-bottom: calc(var(--safe-bottom) + 8px);
+}
