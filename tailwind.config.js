@@ -4,28 +4,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        // DiuMed Design System
-        'mineral-black': 'var(--color-mineral-black)',
-        'deep-graphite': 'var(--color-deep-graphite)',
-        'raised-graphite': 'var(--color-deep-graphite)', /* Mapped similarly for now */
-        'warm-pearl': 'var(--color-warm-pearl)',
-        'soft-bone': 'var(--color-soft-bone)',
-        stone: 'var(--color-stone)',
-        'muted-slate': 'var(--color-muted-slate)',
+        // Semantic Tokens
+        'bg-base': 'var(--bg-base)',
+        'bg-surface': 'var(--bg-surface)',
+        'bg-raised': 'var(--bg-raised)',
+        'bg-instrument': 'var(--bg-instrument)',
+        
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-muted': 'var(--text-muted)',
+        'text-technical': 'var(--text-technical)',
+        
         'signal-teal': 'var(--color-signal-teal)',
-        'signal-burgundy': '#9A4F58', /* Kept static for specific UI elements */
         'signal-amber': 'var(--color-signal-amber)',
-        'emergency-red': 'var(--color-emergency-red)',
-        // Semantic tokens
-        surface: {
-          base: 'var(--color-mineral-black)',
-          raised: 'var(--color-deep-graphite)',
-          instrument: 'var(--color-deep-graphite)',
-          overlay: 'rgba(23,27,30,0.92)',
-          warning: 'rgba(210,163,71,0.12)',
-          emergency: 'rgba(214,91,85,0.12)',
-          measure: 'rgba(87,185,167,0.10)',
-        },
+        'signal-burgundy': 'var(--color-signal-burgundy)',
+        'emergency-red': 'var(--color-emergency)',
+        
+        // Retain legacy aliases temporarily if needed
+        'mineral-black': 'var(--bg-base)',
+        'deep-graphite': 'var(--bg-raised)',
+        'warm-pearl': 'var(--text-primary)',
+        'soft-bone': 'var(--text-secondary)',
+        stone: 'var(--text-muted)',
+        'muted-slate': 'var(--text-technical)',
+      },
+      zIndex: {
+        'nav': '40',
+        'floating': '45',
+        'backdrop': '80',
+        'sheet': '90',
+        'sheet-controls': '95'
       },
       backgroundImage: {
         'material-mineral': 'linear-gradient(145deg, #171B1E 0%, #0D1012 100%)',

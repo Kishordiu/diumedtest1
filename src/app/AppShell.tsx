@@ -6,7 +6,7 @@ export default function AppShell() {
   return (
     <div className="flex flex-col min-h-dvh min-h-screen bg-mineral-black">
       <SyncStatusBar />
-      <main className="flex-1 overflow-y-auto pb-24">
+      <main className="flex-1 overflow-y-auto app-content-safe">
         <Outlet />
       </main>
       <BottomNav />

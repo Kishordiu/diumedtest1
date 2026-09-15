@@ -11,6 +11,8 @@ import type { FinalMeasurementResult, MeasurementPhase } from './camera/types'
 import { useCallback, useRef, useState } from 'react'
 import { OnboardingSheet } from '../../shared/components/OnboardingSheet'
 
+import { AdvancedBadge } from '../../shared/components/AdvancedBadge'
+
 export function BioAuraPage() {
   const navigate = useNavigate()
   const extractorRef = useRef<FaceMeshExtractor | null>(null)
@@ -87,19 +89,22 @@ export function BioAuraPage() {
   const isError = progress.phase === 'PERMISSION_DENIED' || progress.phase === 'CAMERA_UNAVAILABLE' || progress.phase === 'TIMEOUT' || progress.phase === 'TORCH_UNAVAILABLE'
 
   return (
-    <div className="min-h-full bg-mineral-black text-stone flex flex-col" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+    <div className="min-h-[100dvh] bg-base flex flex-col" style={{ paddingTop: 'var(--safe-top)' }}>
       {/* Header */}
-      <div className="flex items-center gap-3 px-5 pt-4 pb-4 relative z-10 bg-mineral-black">
-        <button onClick={() => { stop(); navigate(-1); }} className="text-muted-slate hover:text-stone transition-colors">
-          <ArrowLeft size={20} />
-        </button>
-        <div>
-          <h1 className="text-warm-pearl font-semibold text-lg leading-tight">Bio-Aura</h1>
-          <p className="text-stone text-[10px] font-mono tracking-wide text-signal-teal">FACIAL OPTICAL ESTIMATE</p>
+      <div className="flex items-center justify-between px-5 pt-4 pb-4 relative z-10 bg-base">
+        <div className="flex items-center gap-3">
+          <button onClick={() => { stop(); navigate(-1); }} className="text-muted hover:text-primary transition-colors">
+            <ArrowLeft size={20} />
+          </button>
+          <div>
+            <h1 className="text-primary font-semibold text-lg leading-tight">Bio-Aura</h1>
+            <p className="text-technical text-[10px] font-mono tracking-wide text-signal-teal">FACIAL OPTICAL ESTIMATE</p>
+          </div>
         </div>
+        <AdvancedBadge />
       </div>
 
-      <div className="flex-1 flex flex-col px-5 py-2 overflow-y-auto">
+      <div className="flex-1 flex flex-col px-5 py-2 overflow-y-auto app-content-safe no-scrollbar">
         
         {/* Face Sensor UI */}
         <CameraLensInstrument 
@@ -108,11 +113,11 @@ export function BioAuraPage() {
           overlay={
             <>
               {isError && (
-                <div className="absolute inset-0 bg-mineral-black/90 rounded-3xl flex flex-col items-center justify-center p-4 text-center z-20 backdrop-blur-md">
+                <div className="absolute inset-0 bg-base/90 rounded-3xl flex flex-col items-center justify-center p-4 text-center z-20 backdrop-blur-md">
                   <Info size={28} className="text-emergency-red mb-3" />
-                  <p className="text-warm-pearl font-medium text-sm mb-2">{msg.title}</p>
-                  <p className="text-stone text-xs mb-4">{msg.text}</p>
-                  <button onClick={start} className="text-[10px] font-semibold text-stone uppercase tracking-wider bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 pointer-events-auto">
+                  <p className="text-primary font-medium text-sm mb-2">{msg.title}</p>
+                  <p className="text-muted text-xs mb-4">{msg.text}</p>
+                  <button onClick={start} className="text-[10px] font-semibold text-primary uppercase tracking-wider bg-[var(--glass-surface)] px-4 py-2 rounded-full hover:bg-[var(--glass-surface)] pointer-events-auto">
                     Retry
                   </button>
                 </div>
@@ -136,45 +141,45 @@ export function BioAuraPage() {
         </CameraLensInstrument>
 
         <div className="flex flex-col items-center mb-8 mt-2">
-           <h2 className="text-lg text-warm-pearl font-medium mb-1">{msg.title}</h2>
-           <p className="text-sm text-stone">{msg.text}</p>
+           <h2 className="text-lg text-primary font-medium mb-1">{msg.title}</h2>
+           <p className="text-sm text-muted">{msg.text}</p>
            {progress.elapsedSeconds > 0 && !isError && (
-             <div className="mt-4 bg-white/5 border border-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs text-warm-pearl font-mono">
+             <div className="mt-4 bg-[var(--glass-surface)] border border-[var(--glass-border)] backdrop-blur-sm rounded-full px-4 py-1.5 text-xs text-primary font-mono">
                {progress.elapsedSeconds.toFixed(1)}s / {progress.targetWindowSeconds}s
              </div>
            )}
         </div>
 
         {/* Live Data Instrument */}
-        <div className="bg-deep-graphite rounded-3xl p-5 w-full border border-white/5 shadow-xl mt-auto">
+        <div className="bg-instrument rounded-3xl p-5 w-full border border-[var(--glass-border)] shadow-[var(--shadow-subtle)] mt-auto">
            <div className="flex justify-between items-end mb-5">
              <div>
-               <p className="text-[10px] text-muted-slate uppercase tracking-wider mb-1.5">Optical Signal</p>
+               <p className="text-[10px] text-technical uppercase tracking-wider mb-1.5">Optical Signal</p>
                <div className="flex items-center gap-2">
                  <div className={`w-2 h-2 rounded-full ${(progress.signalQuality === 'GOOD' || progress.signalQuality === 'EXCELLENT') ? 'bg-signal-teal shadow-[0_0_8px_rgba(87,185,167,0.8)]' : progress.signalQuality === 'FAIR' ? 'bg-signal-amber' : 'bg-emergency-red'}`} />
-                 <p className="text-xs text-warm-pearl font-medium">
+                 <p className="text-xs text-primary font-medium">
                    {progress.signalQuality}
                  </p>
                </div>
              </div>
              
              <div className="text-right">
-                <p className="text-[10px] text-muted-slate uppercase tracking-wider mb-1">Estimate</p>
+                <p className="text-[10px] text-technical uppercase tracking-wider mb-1">Estimate</p>
                 {progress.candidateBPM ? (
                   <div className="flex items-baseline gap-1">
-                    <span className="text-3xl text-stone font-light">{Math.round(progress.candidateBPM)}</span>
-                    <span className="text-xs text-muted-slate">BPM</span>
+                    <span className="text-3xl text-primary font-light">{Math.round(progress.candidateBPM)}</span>
+                    <span className="text-xs text-muted">BPM</span>
                   </div>
                 ) : (
-                  <span className="text-sm text-muted-slate">--</span>
+                  <span className="text-sm text-muted">--</span>
                 )}
              </div>
            </div>
 
-           <div className="h-16 bg-mineral-black rounded-xl overflow-hidden relative border border-white/5 shadow-inner">
-             <LiveSignalGraph waveform={progress.waveformBuffer} color="#57B9A7" height={64} />
+           <div className="h-16 bg-base rounded-xl overflow-hidden relative border border-[var(--glass-border)] shadow-inner">
+             <LiveSignalGraph waveform={progress.waveformBuffer} color="var(--color-signal-teal)" height={64} />
              {(progress.phase === 'CAPTURING' || progress.phase === 'SIGNAL_DETECTED' || progress.phase === 'ANALYZING') && (
-                <div className="absolute top-0 bottom-0 right-0 w-12 bg-gradient-to-r from-transparent to-mineral-black pointer-events-none" />
+                <div className="absolute top-0 bottom-0 right-0 w-12 bg-gradient-to-r from-transparent to-base pointer-events-none" />
              )}
            </div>
         </div>

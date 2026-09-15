@@ -15,9 +15,12 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 bg-mineral-black/70 backdrop-blur-2xl border-t border-white/5 flex items-stretch pt-2"
+      className="fixed bottom-0 left-0 right-0 z-nav bg-surface/85 backdrop-blur-2xl border-t shadow-[var(--shadow-subtle)] flex items-stretch pt-2 transition-colors duration-500"
       aria-label="Main navigation"
-      style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 8px)' }}
+      style={{ 
+        paddingBottom: 'calc(var(--safe-bottom) + 8px)',
+        borderColor: 'var(--glass-border)'
+      }}
     >
       {navItems.map(({ to, icon: Icon, labelKey, end }) => (
         <NavLink
