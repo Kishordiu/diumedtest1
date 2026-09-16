@@ -1,5 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { log } from '../../../core/logger';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Capacitor } from '@capacitor/core';
 
 export type VisionInputMode = 'LIVE' | 'UPLOAD';
 
@@ -108,11 +110,41 @@ export function useVisionInput(defaultMode: VisionInputMode = 'LIVE') {
     img.src = url;
   }, [cleanup]);
 
-  const triggerFilePicker = useCallback(() => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
+  const triggerFilePicker = useCallback(async () => {
+    if (Capacitor.isNativePlatform()) {
+      try {
+        const image = await Camera.getPhoto({
+          quality: 90,
+          allowEditing: false,
+          resultType: CameraResultType.Uri,
+          source: CameraSource.Photos
+        });
+        
+        if (image.webPath) {
+          cleanup();
+          setState(s => ({ ...s, mode: 'UPLOAD', status: 'PREPARING', errorMessage: null, imageReady: false, imageElement: null }));
+          
+          const img = new Image();
+          img.onload = () => {
+            setState(s => ({ ...s, status: 'IMAGE_LOADED', imageElement: img, imageReady: true }));
+          };
+          img.onerror = () => {
+            setState(s => ({ ...s, status: 'ERROR', errorMessage: 'Failed to load image file.' }));
+          };
+          img.src = image.webPath; // Capacitor automatically handles local file URIs via webPath
+        }
+      } catch (error: any) {
+         log.error('Camera', 'Failed to pick photo', error);
+         if (error.message !== 'User cancelled photos app') {
+           setState(s => ({ ...s, status: 'ERROR', errorMessage: 'Failed to open photo picker.' }));
+         }
+      }
+    } else {
+      if (fileInputRef.current) {
+        fileInputRef.current.click();
+      }
     }
-  }, []);
+  }, [cleanup]);
 
   return {
     state,

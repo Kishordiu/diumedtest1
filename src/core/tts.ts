@@ -1,6 +1,8 @@
 import { supabase } from './supabase'
 import { log } from './logger'
 import i18n from './i18n/i18n'
+import { Capacitor } from '@capacitor/core'
+import { TextToSpeech } from '@capacitor-community/text-to-speech'
 
 class TTSService {
   private audioContext: AudioContext | null = null
@@ -122,7 +124,28 @@ class TTSService {
     }
   }
 
-  private browserFallback(text: string, lang: string) {
+  private async browserFallback(text: string, lang: string) {
+    if (Capacitor.isNativePlatform()) {
+      try {
+        const langMap: Record<string, string> = {
+          'en': 'en-US',
+          'ta': 'ta-IN',
+          'hi': 'hi-IN'
+        }
+        await TextToSpeech.speak({
+          text: text,
+          lang: langMap[lang] || 'en-US',
+          rate: 0.9,
+          pitch: 1.0,
+          volume: 1.0
+        })
+        return
+      } catch (e) {
+        log.error('TTS', 'Native TTS failed', e)
+        // Fallthrough to browser synthesis if native fails
+      }
+    }
+
     if (!('speechSynthesis' in window)) return
 
     // Cancel any ongoing speech
