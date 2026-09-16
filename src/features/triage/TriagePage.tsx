@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+
 import { Send, Wifi, WifiOff, AlertTriangle, AlertCircle, CheckCircle, HelpCircle } from 'lucide-react'
 import { useAuth } from '../../core/auth/AuthContext'
 import { supabase } from '../../core/supabase'
@@ -28,7 +29,7 @@ const severityConfig: Record<TriageSeverity, { label: string; icon: typeof Alert
 }
 
 export default function TriagePage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { user } = useAuth()
   const isOnline = useNetworkStatus()
 
@@ -131,8 +132,7 @@ export default function TriagePage() {
 
   return (
     <div
-      className="min-h-full bg-mineral-black"
-      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+      className="flex flex-col min-h-dvh bg-mineral-black"
     >
       {/* Header */}
       <div className="px-5 pt-5 pb-4 border-b border-[var(--glass-border)]">
@@ -224,3 +224,4 @@ export default function TriagePage() {
     </div>
   )
 }
+

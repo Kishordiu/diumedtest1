@@ -16,7 +16,7 @@ export function CameraLensInstrument({ phase, children, overlay, shape = 'circle
   const isSuccess = phase === 'RESULT_READY';
 
   let borderColor = 'border-[var(--glass-border)]';
-  let glowColor = 'shadow-[0_0_20px_rgba(255,255,255,0.05)]';
+  let glowColor = 'shadow-[0_0_20px_var(--glass-border)]';
   let innerGlow = '';
   
   if (isActive) {
@@ -56,13 +56,13 @@ export function CameraLensInstrument({ phase, children, overlay, shape = 'circle
         </div>
 
         {/* Frosted Lens Interior Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--glass-surface)] to-transparent pointer-events-none mix-blend-overlay" />
         
         {/* Inner shadow for depth */}
         <div className="absolute inset-0 shadow-[inset_0_10px_30px_rgba(0,0,0,0.8)] pointer-events-none" />
 
         {/* Small optical aperture reflection */}
-        <div className="absolute top-[10%] left-[20%] w-[15%] h-[15%] bg-white/20 blur-md rounded-full pointer-events-none mix-blend-screen" />
+        <div className="absolute top-[10%] left-[20%] w-[15%] h-[15%] bg-[var(--glass-surface)] blur-md rounded-full pointer-events-none mix-blend-screen" />
       </div>
 
       {/* Dynamic Overlay (e.g. Fingerprint, Face Frame, Errors) */}

@@ -89,7 +89,7 @@ export function BioAuraPage() {
   const isError = progress.phase === 'PERMISSION_DENIED' || progress.phase === 'CAMERA_UNAVAILABLE' || progress.phase === 'TIMEOUT' || progress.phase === 'TORCH_UNAVAILABLE'
 
   return (
-    <div className="min-h-[100dvh] bg-base flex flex-col" style={{ paddingTop: 'var(--safe-top)' }}>
+    <div className="flex flex-col bg-base" style={{ minHeight: '100dvh', paddingTop: 'var(--safe-top)' }}>
       {/* Header */}
       <div className="flex items-center justify-between px-5 pt-4 pb-4 relative z-10 bg-base">
         <div className="flex items-center gap-3">
@@ -104,7 +104,7 @@ export function BioAuraPage() {
         <AdvancedBadge />
       </div>
 
-      <div className="flex-1 flex flex-col px-5 py-2 overflow-y-auto app-content-safe no-scrollbar">
+      <div className="flex-1 flex flex-col px-5 py-2 overflow-y-auto no-scrollbar">
         
         {/* Face Sensor UI */}
         <CameraLensInstrument 
@@ -224,10 +224,10 @@ function CameraFrame({ phase }: { phase: MeasurementPhase }) {
   return (
     <div className="relative w-32 h-40 flex items-center justify-center">
       {/* Target Bracket */}
-      <div className={`absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 transition-colors duration-500 ${isTracking ? 'border-signal-teal' : 'border-white/30'}`} />
-      <div className={`absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 transition-colors duration-500 ${isTracking ? 'border-signal-teal' : 'border-white/30'}`} />
-      <div className={`absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 transition-colors duration-500 ${isTracking ? 'border-signal-teal' : 'border-white/30'}`} />
-      <div className={`absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 transition-colors duration-500 ${isTracking ? 'border-signal-teal' : 'border-white/30'}`} />
+      <div className={`absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 transition-colors duration-500 ${isTracking ? 'border-signal-teal' : 'border-[var(--glass-border)]'}`} />
+      <div className={`absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 transition-colors duration-500 ${isTracking ? 'border-signal-teal' : 'border-[var(--glass-border)]'}`} />
+      <div className={`absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 transition-colors duration-500 ${isTracking ? 'border-signal-teal' : 'border-[var(--glass-border)]'}`} />
+      <div className={`absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 transition-colors duration-500 ${isTracking ? 'border-signal-teal' : 'border-[var(--glass-border)]'}`} />
     </div>
   )
 }

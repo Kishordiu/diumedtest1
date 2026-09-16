@@ -1,8 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Camera as CapacitorCamera, CameraResultType, CameraSource } from '@capacitor/camera'
 import { ArrowLeft, FileText, Camera, CheckCircle, RefreshCw, Save, AlertCircle, Edit2, Trash2, AlertTriangle, Loader2, Info } from 'lucide-react'
 import Button from '../../shared/components/Button'
 import { supabase } from '../../core/supabase'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../core/auth/AuthContext'
 import { motion } from 'framer-motion'
 import { useNetworkStatus } from '../../shared/hooks/useNetworkStatus'
@@ -29,6 +31,7 @@ interface ParsedReport {
 export default function LabReportScanner() {
   const navigate = useNavigate()
   const { session } = useAuth()
+  const { t, i18n } = useTranslation()
   const isOnline = useNetworkStatus()
   const fileInputRef = useRef<HTMLInputElement>(null)
   
@@ -41,6 +44,46 @@ export default function LabReportScanner() {
   // Edit state
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [editValue, setEditValue] = useState<string>('')
+
+  const handleNativeCamera = async () => {
+    try {
+      const image = await CapacitorCamera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Base64,
+        source: CameraSource.Camera
+      });
+      
+      if (image.base64String) {
+        const dataUrl = `data:image/${image.format};base64,${image.base64String}`;
+        setCapturedImage(dataUrl);
+        setState('SCANNING');
+        
+        const { data, error } = await supabase.functions.invoke('parse_lab_report', {
+          body: { base64Image: dataUrl, language: i18n.language }
+        });
+
+        if (error) {
+          if (error.context?.status >= 500) {
+            throw new Error('The analysis service is temporarily unavailable.');
+          }
+          throw error;
+        }
+
+        if (!data || !data.biomarkers || data.biomarkers.length === 0) {
+          throw new Error('Could not detect valid biomarkers. Please ensure it is a clear photo.');
+        }
+
+        setParsedData(data);
+        setState('REVIEW');
+      }
+    } catch (err: any) {
+      if (err.message !== 'User cancelled photos app') {
+        setError(err.message || 'Camera permission denied or unavailable.');
+        setState('ERROR');
+      }
+    }
+  }
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -57,7 +100,7 @@ export default function LabReportScanner() {
           setCapturedImage(base64Image)
           
           const { data, error } = await supabase.functions.invoke('parse_lab_report', {
-            body: { base64Image }
+            body: { base64Image, language: i18n.language }
           })
 
           if (error) {
@@ -212,7 +255,7 @@ export default function LabReportScanner() {
               <Button 
                 variant="primary" 
                 className="w-full"
-                onClick={() => fileInputRef.current?.click()}
+                onClick={handleNativeCamera}
                 icon={<Camera size={18} />}
               >
                 Take Photo
@@ -263,7 +306,7 @@ export default function LabReportScanner() {
               {error || 'The analysis service is temporarily unavailable.'}
             </p>
             <div className="flex flex-col gap-3 w-full max-w-xs">
-              <Button variant="primary" onClick={() => fileInputRef.current?.click()}>
+              <Button variant="primary" onClick={handleNativeCamera}>
                 TRY AGAIN
               </Button>
               <Button variant="secondary" onClick={() => setState('UPLOAD')}>

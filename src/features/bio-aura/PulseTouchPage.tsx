@@ -64,7 +64,7 @@ export function PulseTouchPage() {
   const isError = progress.phase === 'PERMISSION_DENIED' || progress.phase === 'CAMERA_UNAVAILABLE' || progress.phase === 'TIMEOUT' || progress.phase === 'TORCH_UNAVAILABLE'
 
   return (
-    <div className="min-h-[100dvh] bg-base flex flex-col pb-[calc(var(--nav-height)+var(--safe-bottom))]" style={{ paddingTop: 'var(--safe-top)' }}>
+    <div className="flex flex-col bg-base" style={{ minHeight: '100dvh', paddingTop: 'var(--safe-top)' }}>
       <div className="flex items-center justify-between px-5 pt-4 pb-4 relative z-10 bg-base">
         <div className="flex items-center gap-3">
           <button onClick={() => { stop(); navigate(-1); }} className="text-muted hover:text-primary transition-colors">
@@ -78,7 +78,7 @@ export function PulseTouchPage() {
         <BetaBadge />
       </div>
 
-      <div className="flex-1 flex flex-col px-5 py-2 overflow-y-auto app-content-safe no-scrollbar">
+      <div className="flex-1 flex flex-col px-5 py-2 overflow-y-auto no-scrollbar">
         
         {/* Optical Sensor UI */}
         <CameraLensInstrument 

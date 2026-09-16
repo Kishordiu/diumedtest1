@@ -218,7 +218,7 @@ export default function AnemiaScreeningPage() {
                          initial={{ left: '0%' }}
                          animate={{ left: `${Math.min(Math.max((hbEstimate.estimatedHb - 8) / (16 - 8) * 100, 0), 100)}%` }}
                          transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
-                         className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)] -ml-1.5"
+                         className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-[var(--glass-surface)] rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)] -ml-1.5"
                        />
                     </div>
                     <div className="flex justify-between text-[8px] text-muted-slate font-mono uppercase mt-1">

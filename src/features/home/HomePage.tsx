@@ -64,7 +64,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-full bg-base text-muted flex flex-col app-content-safe overflow-x-hidden" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+    <div className="min-h-full bg-base text-primary flex flex-col overflow-x-hidden" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-6 z-10 relative">
         <div className="flex items-center gap-2">
