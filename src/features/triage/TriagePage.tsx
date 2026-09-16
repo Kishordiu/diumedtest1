@@ -135,7 +135,7 @@ export default function TriagePage() {
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
       {/* Header */}
-      <div className="px-5 pt-5 pb-4 border-b border-white/5">
+      <div className="px-5 pt-5 pb-4 border-b border-[var(--glass-border)]">
         <h1 className="text-warm-pearl text-xl font-semibold">{t('triage.title')}</h1>
         <p className="text-muted-slate text-sm">{t('triage.subtitle')}</p>
       </div>
@@ -143,15 +143,15 @@ export default function TriagePage() {
       {/* Source indicator */}
       <div className="px-5 pt-3 pb-1 flex items-center gap-2">
         {isOnline ? (
-          <><Wifi size={12} className="text-signal-teal" /><span className="text-xs text-stone">Online — AI assistance available</span></>
+          <><Wifi size={12} className="text-signal-teal" /><span className="text-xs text-muted">Online — AI assistance available</span></>
         ) : (
-          <><WifiOff size={12} className="text-signal-amber" /><span className="text-xs text-stone">Offline — rule engine only</span></>
+          <><WifiOff size={12} className="text-signal-amber" /><span className="text-xs text-muted">Offline — rule engine only</span></>
         )}
       </div>
 
       {/* Input */}
       <div className="px-5 pt-3 pb-4">
-        <label className="block text-stone text-xs mb-2 tracking-wider uppercase">
+        <label className="block text-muted text-xs mb-2 tracking-wider uppercase">
           Describe your symptoms
         </label>
         <textarea
@@ -159,7 +159,7 @@ export default function TriagePage() {
           onChange={e => setSymptomText(e.target.value)}
           placeholder={t('triage.placeholder')}
           rows={4}
-          className="w-full bg-deep-graphite text-warm-pearl border border-white/10 rounded-card px-4 py-3 text-sm placeholder:text-muted-slate/50 focus:outline-none focus:border-signal-teal transition-colors resize-none"
+          className="w-full bg-deep-graphite text-warm-pearl border border-[var(--glass-border)] rounded-card px-4 py-3 text-sm placeholder:text-muted-slate/50 focus:outline-none focus:border-signal-teal transition-colors resize-none"
           aria-label="Describe your symptoms"
         />
         {error && <p className="text-signal-amber text-xs mt-1">{error}</p>}
@@ -186,11 +186,11 @@ export default function TriagePage() {
             className="px-5 pb-6 space-y-3"
           >
             {/* Severity badge */}
-            <div className={`${cfg.surfaceClass || 'bg-deep-graphite border border-white/10'} rounded-card p-4`}>
+            <div className={`${cfg.surfaceClass || 'bg-deep-graphite border border-[var(--glass-border)]'} rounded-card p-4`}>
               <div className="flex items-center gap-2 mb-2">
                 <cfg.icon size={18} className={cfg.colorClass} />
                 <span className={`text-sm font-semibold ${cfg.colorClass}`}>{cfg.label}</span>
-                <span className="ml-auto text-xs text-muted-slate bg-white/5 px-2 py-0.5 rounded-full">
+                <span className="ml-auto text-xs text-muted-slate bg-[var(--glass-surface)] px-2 py-0.5 rounded-full">
                   {result.source === 'OFFLINE_RULE_ENGINE' ? t('triage.source.offline') : t('triage.source.online')}
                 </span>
               </div>
@@ -198,7 +198,7 @@ export default function TriagePage() {
             </div>
 
             {/* Limitations */}
-            <div className="bg-deep-graphite rounded-card p-4 border border-white/5">
+            <div className="bg-deep-graphite rounded-card p-4 border border-[var(--glass-border)]">
               <p className="text-muted-slate text-xs leading-relaxed">{result.limitations}</p>
             </div>
 

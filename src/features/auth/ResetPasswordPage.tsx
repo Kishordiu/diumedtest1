@@ -90,7 +90,7 @@ export default function ResetPasswordPage() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              className="w-full bg-material-glass backdrop-blur-md border-white/10 text-warm-pearl border border-white/5 rounded-instrument pl-11 pr-12 py-3.5 text-sm placeholder:text-muted-slate focus:outline-none focus:border-signal-teal/50 transition-all shadow-inner"
+              className="w-full bg-material-glass backdrop-blur-md border-[var(--glass-border)] text-warm-pearl border border-[var(--glass-border)] rounded-instrument pl-11 pr-12 py-3.5 text-sm placeholder:text-muted-slate focus:outline-none focus:border-signal-teal/50 transition-all shadow-inner"
               placeholder="New password"
             />
             <button
@@ -109,7 +109,7 @@ export default function ResetPasswordPage() {
               value={confirmPassword}
               onChange={e => setConfirmPassword(e.target.value)}
               required
-              className="w-full bg-material-glass backdrop-blur-md border-white/10 text-warm-pearl border border-white/5 rounded-instrument pl-11 pr-4 py-3.5 text-sm placeholder:text-muted-slate focus:outline-none focus:border-signal-teal/50 transition-all shadow-inner"
+              className="w-full bg-material-glass backdrop-blur-md border-[var(--glass-border)] text-warm-pearl border border-[var(--glass-border)] rounded-instrument pl-11 pr-4 py-3.5 text-sm placeholder:text-muted-slate focus:outline-none focus:border-signal-teal/50 transition-all shadow-inner"
               placeholder="Confirm new password"
             />
           </div>

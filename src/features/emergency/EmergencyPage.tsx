@@ -119,7 +119,7 @@ export default function EmergencyPage() {
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
       {/* Header */}
-      <div className="px-5 pt-5 pb-4 border-b border-white/5">
+      <div className="px-5 pt-5 pb-4 border-b border-[var(--glass-border)]">
         <div className="flex items-center gap-2 mb-1">
           <AlertTriangle size={18} className="text-emergency-red" />
           <h1 className="text-warm-pearl text-xl font-semibold">{t('emergency.title')}</h1>
@@ -138,7 +138,7 @@ export default function EmergencyPage() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-deep-graphite rounded-card p-4 mb-5 border border-white/10"
+            className="bg-deep-graphite rounded-card p-4 mb-5 border border-[var(--glass-border)]"
           >
             <p className="text-warm-pearl text-sm">{stateMessages[emergencyState]}</p>
             {emergencyState === 'RETURNED' && (
@@ -166,15 +166,15 @@ export default function EmergencyPage() {
           ))}
 
           {!hasEmergencyContact && (
-            <div className="bg-deep-graphite rounded-card p-4 border border-white/5">
-              <p className="text-stone text-sm">{t('emergency.noContact')}</p>
+            <div className="bg-deep-graphite rounded-card p-4 border border-[var(--glass-border)]">
+              <p className="text-muted text-sm">{t('emergency.noContact')}</p>
               <p className="text-signal-teal text-xs mt-1">{t('emergency.addContact')}</p>
             </div>
           )}
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-6 bg-deep-graphite rounded-card p-4 border border-white/5">
+        <div className="mt-6 bg-deep-graphite rounded-card p-4 border border-[var(--glass-border)]">
           <p className="text-muted-slate text-xs leading-relaxed">
             {t('emergency.disclaimer')}
           </p>

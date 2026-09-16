@@ -67,27 +67,27 @@ export default function ProfilePage() {
 
   return (
     <div
-      className="min-h-full bg-mineral-black pb-8"
+      className="min-h-full bg-base pb-[calc(var(--nav-height)+24px)]"
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
-      <div className="px-5 pt-5 pb-4 border-b border-white/5">
-        <h1 className="text-warm-pearl text-xl font-semibold">{t('profile.title')}</h1>
+      <div className="px-5 pt-5 pb-4 border-b border-[var(--glass-border)]">
+        <h1 className="text-primary text-xl font-semibold">{t('profile.title')}</h1>
       </div>
 
       <div className="px-5 pt-5 space-y-5">
         {/* Personal info */}
         <section>
           <div className="flex items-center gap-2 mb-3">
-            <User size={14} className="text-muted-slate" />
-            <p className="text-stone text-xs tracking-wider uppercase">Personal</p>
+            <User size={14} className="text-technical" />
+            <p className="text-muted text-xs tracking-wider uppercase">Personal</p>
           </div>
-          <div className="bg-deep-graphite rounded-card divide-y divide-white/5 border border-white/5">
+          <div className="bg-surface rounded-card divide-y divide-[var(--glass-border)] border border-[var(--glass-border)] shadow-sm">
             <ProfileField label={t('profile.name')}>
               <input
                 type="text"
                 value={fullName}
                 onChange={e => setFullName(e.target.value)}
-                className="bg-transparent text-warm-pearl text-sm text-right focus:outline-none placeholder:text-muted-slate/50 w-full"
+                className="bg-transparent text-primary text-sm text-right focus:outline-none placeholder:text-muted/50 w-full"
                 placeholder="Your name"
               />
             </ProfileField>
@@ -96,14 +96,14 @@ export default function ProfilePage() {
                 type="date"
                 value={dob}
                 onChange={e => setDob(e.target.value)}
-                className="bg-transparent text-warm-pearl text-sm text-right focus:outline-none w-full"
+                className="bg-transparent text-primary text-sm text-right focus:outline-none w-full"
               />
             </ProfileField>
             <ProfileField label={t('profile.sex')} hint={t('common.optional')}>
               <select
                 value={sex}
                 onChange={e => setSex(e.target.value as Sex | '')}
-                className="bg-transparent text-warm-pearl text-sm text-right focus:outline-none w-auto"
+                className="bg-transparent text-primary text-sm text-right focus:outline-none w-auto"
               >
                 <option value="">—</option>
                 <option value="male">{t('profile.sexOptions.male')}</option>
@@ -118,25 +118,25 @@ export default function ProfilePage() {
         {/* Theme Settings */}
         <section>
           <div className="flex items-center gap-2 mb-3">
-            {theme === 'dark' ? <Moon size={14} className="text-muted-slate" /> : <Sun size={14} className="text-muted-slate" />}
-            <p className="text-stone text-xs tracking-wider uppercase">Appearance</p>
+            {theme === 'dark' ? <Moon size={14} className="text-technical" /> : <Sun size={14} className="text-technical" />}
+            <p className="text-muted text-xs tracking-wider uppercase">Appearance</p>
           </div>
-          <div className="bg-deep-graphite rounded-card border border-white/5 p-3 flex items-center justify-between">
-            <span className="text-warm-pearl text-sm ml-1">
+          <div className="bg-surface rounded-card border border-[var(--glass-border)] p-3 flex items-center justify-between shadow-sm">
+            <span className="text-primary text-sm ml-1">
               {theme === 'dark' ? 'Dark Mineral Theme' : 'Warm Pearl Theme'}
             </span>
             <button
               onClick={toggleTheme}
               className={`w-14 h-8 rounded-full p-1 transition-colors duration-300 ease-in-out relative flex items-center ${
-                theme === 'warm' ? 'bg-signal-teal' : 'bg-raised-graphite'
+                theme === 'warm' ? 'bg-signal-teal' : 'bg-instrument'
               }`}
             >
               <div 
-                className={`w-6 h-6 rounded-full bg-warm-pearl shadow-md transform transition-transform duration-300 ease-in-out flex items-center justify-center ${
+                className={`w-6 h-6 rounded-full bg-white shadow-md transform transition-transform duration-300 ease-in-out flex items-center justify-center ${
                   theme === 'warm' ? 'translate-x-6' : 'translate-x-0'
                 }`}
               >
-                {theme === 'dark' ? <Moon size={12} className="text-mineral-black" /> : <Sun size={12} className="text-signal-teal" />}
+                {theme === 'dark' ? <Moon size={12} className="text-gray-900" /> : <Sun size={12} className="text-signal-teal" />}
               </div>
             </button>
           </div>
@@ -145,19 +145,19 @@ export default function ProfilePage() {
         {/* Language */}
         <section>
           <div className="flex items-center gap-2 mb-3">
-            <Globe size={14} className="text-muted-slate" />
-            <p className="text-stone text-xs tracking-wider uppercase">{t('profile.language')}</p>
+            <Globe size={14} className="text-technical" />
+            <p className="text-muted text-xs tracking-wider uppercase">{t('profile.language')}</p>
           </div>
-          <div className="bg-deep-graphite rounded-card border border-white/5">
+          <div className="bg-surface rounded-card border border-[var(--glass-border)] shadow-sm">
             <div className="flex gap-2 p-3">
               {(['en', 'ta', 'hi'] as Language[]).map(lang => (
                 <button
                   key={lang}
                   onClick={() => setLanguage(lang)}
-                  className={`flex-1 py-2 rounded-instrument text-sm transition-colors ${
+                  className={`flex-1 py-2 rounded-instrument text-sm font-medium transition-colors ${
                     language === lang
-                      ? 'bg-signal-teal/15 text-signal-teal border border-signal-teal/30'
-                      : 'text-muted-slate hover:text-stone'
+                      ? 'bg-signal-teal text-primary shadow-sm'
+                      : 'text-technical hover:text-primary bg-transparent hover:bg-black/5 dark:hover:bg-[var(--glass-surface)]'
                   }`}
                 >
                   {t(`profile.languages.${lang}`)}
@@ -170,16 +170,16 @@ export default function ProfilePage() {
         {/* Emergency contact */}
         <section>
           <div className="flex items-center gap-2 mb-3">
-            <Phone size={14} className="text-muted-slate" />
-            <p className="text-stone text-xs tracking-wider uppercase">{t('profile.emergencyContact')}</p>
+            <Phone size={14} className="text-technical" />
+            <p className="text-muted text-xs tracking-wider uppercase">{t('profile.emergencyContact')}</p>
           </div>
-          <div className="bg-deep-graphite rounded-card divide-y divide-white/5 border border-white/5">
+          <div className="bg-surface rounded-card divide-y divide-[var(--glass-border)] border border-[var(--glass-border)] shadow-sm">
             <ProfileField label={t('profile.emergencyContactName')} hint={t('common.optional')}>
               <input
                 type="text"
                 value={ecName}
                 onChange={e => setEcName(e.target.value)}
-                className="bg-transparent text-warm-pearl text-sm text-right focus:outline-none placeholder:text-muted-slate/50 w-full"
+                className="bg-transparent text-primary text-sm text-right focus:outline-none placeholder:text-muted/50 w-full"
                 placeholder="Contact name"
               />
             </ProfileField>
@@ -188,7 +188,7 @@ export default function ProfilePage() {
                 type="tel"
                 value={ecPhone}
                 onChange={e => setEcPhone(e.target.value)}
-                className="bg-transparent text-warm-pearl text-sm text-right focus:outline-none placeholder:text-muted-slate/50 w-full"
+                className="bg-transparent text-primary text-sm text-right focus:outline-none placeholder:text-muted/50 w-full"
                 placeholder="+91 XXXXX XXXXX"
               />
             </ProfileField>
@@ -198,11 +198,11 @@ export default function ProfilePage() {
         {/* Consent */}
         <section>
           <div className="flex items-center gap-2 mb-3">
-            <ShieldCheck size={14} className="text-muted-slate" />
-            <p className="text-stone text-xs tracking-wider uppercase">{t('profile.consent')}</p>
+            <ShieldCheck size={14} className="text-technical" />
+            <p className="text-muted text-xs tracking-wider uppercase">{t('profile.consent')}</p>
           </div>
-          <div className="bg-deep-graphite rounded-card p-4 border border-white/5">
-            <p className="text-soft-bone text-sm">
+          <div className="bg-surface rounded-card p-4 border border-[var(--glass-border)] shadow-sm">
+            <p className="text-secondary text-sm">
               Camera processing happens on your device. Health data is stored in your account only and is never sold or shared.
             </p>
           </div>
@@ -227,7 +227,7 @@ export default function ProfilePage() {
           fullWidth
           onClick={handleSignOut}
           icon={<LogOut size={16} />}
-          className="text-muted-slate"
+          className="text-technical"
         >
           {t('auth.signOut')}
         </Button>
@@ -248,8 +248,8 @@ function ProfileField({
   return (
     <div className="flex items-center justify-between px-4 py-3 gap-4">
       <div className="flex-shrink-0">
-        <p className="text-stone text-sm">{label}</p>
-        {hint && <p className="text-muted-slate text-xs">{hint}</p>}
+        <p className="text-secondary text-sm">{label}</p>
+        {hint && <p className="text-technical text-xs mt-0.5">{hint}</p>}
       </div>
       <div className="flex-1 min-w-0 flex justify-end">{children}</div>
     </div>

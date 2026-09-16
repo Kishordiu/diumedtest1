@@ -129,14 +129,14 @@ export default function AnemiaScreeningPage() {
   const isResultReady = result && hbEstimate
 
   return (
-    <div className="min-h-full bg-mineral-black text-stone flex flex-col" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
-      <div className="flex items-center gap-3 px-5 pt-4 pb-4 border-b border-white/5 bg-mineral-black z-10 relative flex-shrink-0">
-        <button onClick={() => { cleanup(); navigate(-1); }} className="text-muted-slate hover:text-stone transition-colors">
+    <div className="min-h-full bg-mineral-black text-muted flex flex-col" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+      <div className="flex items-center gap-3 px-5 pt-4 pb-4 border-b border-[var(--glass-border)] bg-mineral-black z-10 relative flex-shrink-0">
+        <button onClick={() => { cleanup(); navigate(-1); }} className="text-muted-slate hover:text-muted transition-colors">
           <ArrowLeft size={20} />
         </button>
         <div>
           <h1 className="text-warm-pearl font-semibold text-lg leading-tight">Anemia Screening</h1>
-          <p className="text-stone text-[10px] font-mono tracking-wide text-signal-amber">EXPERIMENTAL MODULE</p>
+          <p className="text-muted text-[10px] font-mono tracking-wide text-signal-amber">EXPERIMENTAL MODULE</p>
         </div>
       </div>
 
@@ -165,7 +165,7 @@ export default function AnemiaScreeningPage() {
               <p className="text-warm-pearl font-medium">Image Quality Insufficient</p>
               <p className="text-emergency-red/80 text-sm">Please ensure neutral lighting and a clear, steady image.</p>
             </div>
-            <div className="w-full bg-raised-graphite rounded-xl p-4 mb-6 text-left border border-white/5 text-sm">
+            <div className="w-full bg-raised-graphite rounded-xl p-4 mb-6 text-left border border-[var(--glass-border)] text-sm">
                 <p className="text-muted-slate mb-2">Quality Gate Report:</p>
                 <div className="space-y-1 font-mono">
                   <div className="flex justify-between"><span>Brightness:</span> <span className={qualityReport.brightness >= 60 ? 'text-signal-teal' : 'text-emergency-red'}>{Math.round(qualityReport.brightness)}</span></div>
@@ -177,7 +177,7 @@ export default function AnemiaScreeningPage() {
 
         {isResultReady && qualityReport && qualityReport.isSufficient && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex-1 flex flex-col pb-6">
-            <div className="bg-material-glass rounded-2xl p-6 mb-4 shadow-xl border border-white/5 flex-1 relative">
+            <div className="bg-material-glass rounded-2xl p-6 mb-4 shadow-xl border border-[var(--glass-border)] flex-1 relative">
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none rounded-2xl" />
               
               <div className="flex items-center justify-between mb-8">
@@ -196,7 +196,7 @@ export default function AnemiaScreeningPage() {
                   hidden: { opacity: 0 },
                   visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
                 }}
-                className="mb-8 border-b border-white/5 pb-8"
+                className="mb-8 border-b border-[var(--glass-border)] pb-8"
               >
                 <motion.p variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="text-muted-slate text-xs uppercase tracking-widest mb-2">Estimated Hemoglobin</motion.p>
                 
@@ -210,7 +210,7 @@ export default function AnemiaScreeningPage() {
                     </div>
 
                     {/* Visual Gauge */}
-                    <div className="w-full h-1.5 bg-mineral-black/50 rounded-full overflow-hidden relative border border-white/5">
+                    <div className="w-full h-1.5 bg-mineral-black/50 rounded-full overflow-hidden relative border border-[var(--glass-border)]">
                        {/* Gradient scale background */}
                        <div className="absolute inset-0 bg-gradient-to-r from-emergency-red via-signal-amber to-signal-teal opacity-30" />
                        {/* Indicator dot */}
@@ -227,8 +227,8 @@ export default function AnemiaScreeningPage() {
                     </div>
                   </motion.div>
                 ) : (
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-                    <p className="text-sm text-stone">Hemoglobin estimation model could not produce a result for this image.</p>
+                  <div className="bg-[var(--glass-surface)] border border-[var(--glass-border)] rounded-xl p-4">
+                    <p className="text-sm text-muted">Hemoglobin estimation model could not produce a result for this image.</p>
                   </div>
                 )}
 
@@ -246,24 +246,24 @@ export default function AnemiaScreeningPage() {
               </motion.div>
 
               {/* MODEL PROVENANCE PANEL */}
-              <div className="mb-8 border-b border-white/5 pb-8">
+              <div className="mb-8 border-b border-[var(--glass-border)] pb-8">
                 <p className="text-muted-slate text-xs uppercase tracking-widest mb-3">Model Provenance</p>
-                <div className="bg-mineral-black/30 rounded-xl p-3 border border-white/5 space-y-2 text-[10px] font-mono text-muted-slate">
+                <div className="bg-mineral-black/30 rounded-xl p-3 border border-[var(--glass-border)] space-y-2 text-[10px] font-mono text-muted-slate">
                   <div className="flex justify-between">
-                    <span className="text-stone">Model</span>
+                    <span className="text-muted">Model</span>
                     <span>{hbEstimate.modelInfo.name} v{hbEstimate.modelInfo.version}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-stone">Method</span>
+                    <span className="text-muted">Method</span>
                     <span>{hbEstimate.provenance.method}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-stone">Training Data</span>
+                    <span className="text-muted">Training Data</span>
                     <span>DOI: {hbEstimate.provenance.datasetDoi} (n={hbEstimate.provenance.validation.n})</span>
                   </div>
                   {hbEstimate.provenance.features && Object.keys(hbEstimate.provenance.features).length > 0 && (
-                    <div className="pt-2 mt-2 border-t border-white/5">
-                      <span className="text-stone block mb-1">Extracted Features:</span>
+                    <div className="pt-2 mt-2 border-t border-[var(--glass-border)]">
+                      <span className="text-muted block mb-1">Extracted Features:</span>
                       {Object.entries(hbEstimate.provenance.features).map(([key, value]) => (
                         <div key={key} className="flex justify-between">
                           <span>{key}</span>
@@ -275,7 +275,7 @@ export default function AnemiaScreeningPage() {
                 </div>
               </div>
 
-              <div className="bg-mineral-black/50 rounded-xl p-4 border border-white/5 flex gap-3">
+              <div className="bg-mineral-black/50 rounded-xl p-4 border border-[var(--glass-border)] flex gap-3">
                  <AlertTriangle size={16} className="text-signal-amber flex-shrink-0" />
                  <p className="text-[11px] text-muted-slate leading-relaxed">
                    <strong>Awareness/screening only.</strong> Experimental camera-based estimate. Not a laboratory measurement.

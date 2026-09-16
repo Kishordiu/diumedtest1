@@ -20,8 +20,8 @@ function formatMeasurementType(type: string): string {
 }
 
 function getSourceIcon(source: string) {
-  if (source === 'camera_contact_ppg') return <Fingerprint size={16} className="text-stone" />
-  if (source === 'lab_report') return <FileText size={16} className="text-stone" />
+  if (source === 'camera_contact_ppg') return <Fingerprint size={16} className="text-muted" />
+  if (source === 'lab_report') return <FileText size={16} className="text-muted" />
   if (source === 'camera_vision_anemia') return <Droplet size={16} className="text-signal-amber" />
   if (source === 'camera_vision_sclera') return <Eye size={16} className="text-signal-teal" />
   return <Activity size={16} className="text-signal-teal" />
@@ -40,7 +40,7 @@ const qualityColors: Record<string, string> = {
   GOOD: 'text-signal-teal bg-signal-teal/10 border-signal-teal/20',
   FAIR: 'text-signal-amber bg-signal-amber/10 border-signal-amber/20',
   POOR: 'text-emergency-red bg-emergency-red/10 border-emergency-red/20',
-  UNKNOWN: 'text-muted-slate bg-white/5 border-white/5',
+  UNKNOWN: 'text-muted-slate bg-[var(--glass-surface)] border-[var(--glass-border)]',
 }
 
 function groupByDate(measurements: Measurement[]) {
@@ -99,7 +99,7 @@ export default function RecordsPage() {
         <h1 className="text-warm-pearl text-3xl font-light tracking-tight">History</h1>
         <button 
           onClick={() => navigate('/scan-lab-report')} 
-          className="text-warm-pearl bg-raised-graphite border border-white/10 px-4 py-2 rounded-full flex items-center gap-2 hover:bg-white/5 transition-colors"
+          className="text-warm-pearl bg-raised-graphite border border-[var(--glass-border)] px-4 py-2 rounded-full flex items-center gap-2 hover:bg-[var(--glass-surface)] transition-colors"
         >
           <Camera size={14} />
           <span className="text-[10px] font-mono uppercase tracking-[0.1em]">Scan Lab</span>
@@ -109,12 +109,12 @@ export default function RecordsPage() {
       {loading ? (
         <div className="px-6 space-y-4">
           {[1, 2, 3].map(i => (
-            <div key={i} className="h-24 bg-raised-graphite rounded-3xl border border-white/5 animate-pulse" />
+            <div key={i} className="h-24 bg-raised-graphite rounded-3xl border border-[var(--glass-border)] animate-pulse" />
           ))}
         </div>
       ) : measurements.length === 0 ? (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center px-6 py-32 text-center">
-          <div className="w-16 h-16 rounded-full bg-raised-graphite flex items-center justify-center mb-6 border border-white/5">
+          <div className="w-16 h-16 rounded-full bg-raised-graphite flex items-center justify-center mb-6 border border-[var(--glass-border)]">
             <ClipboardList size={24} className="text-muted-slate" strokeWidth={1.5} />
           </div>
           <p className="text-warm-pearl text-xl font-light tracking-tight mb-2">No Records Yet</p>
@@ -136,9 +136,9 @@ export default function RecordsPage() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       onClick={() => navigate(`/records/${m.id}`)}
-                      className="w-full bg-raised-graphite rounded-3xl p-5 flex items-center gap-4 hover:border-white/10 transition-colors border border-white/5 group text-left"
+                      className="w-full bg-raised-graphite rounded-3xl p-5 flex items-center gap-4 hover:border-[var(--glass-border)] transition-colors border border-[var(--glass-border)] group text-left"
                     >
-                      <div className="w-12 h-12 rounded-2xl bg-mineral-black border border-white/5 flex items-center justify-center flex-shrink-0 group-hover:border-white/10 transition-colors">
+                      <div className="w-12 h-12 rounded-2xl bg-mineral-black border border-[var(--glass-border)] flex items-center justify-center flex-shrink-0 group-hover:border-[var(--glass-border)] transition-colors">
                         {getSourceIcon(source)}
                       </div>
                       <div className="flex-1">
@@ -168,7 +168,7 @@ export default function RecordsPage() {
                         ) : (
                           <span className="text-muted-slate text-xs">No data</span>
                         )}
-                        <span className={`text-[9px] font-mono uppercase tracking-[0.2em] px-2 py-0.5 rounded-full border ${qualityColors[m.quality] ?? 'text-muted-slate border-white/5'}`}>
+                        <span className={`text-[9px] font-mono uppercase tracking-[0.2em] px-2 py-0.5 rounded-full border ${qualityColors[m.quality] ?? 'text-muted-slate border-[var(--glass-border)]'}`}>
                           {m.quality}
                         </span>
                       </div>

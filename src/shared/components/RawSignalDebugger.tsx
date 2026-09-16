@@ -48,14 +48,14 @@ export const RawSignalDebugger: React.FC<RawSignalDebuggerProps> = ({
 
   return (
     <div className="fixed inset-x-4 top-16 z-50 rounded-xl bg-mineral-black/95 p-4 text-xs font-mono text-warm-pearl border border-signal-teal/30 shadow-2xl backdrop-blur-md">
-      <div className="flex justify-between items-center mb-3 pb-2 border-b border-white/10">
+      <div className="flex justify-between items-center mb-3 pb-2 border-b border-[var(--glass-border)]">
         <span className="font-bold text-signal-teal flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-signal-teal animate-pulse" />
           RAW SIGNAL DIAGNOSTICS ({mode})
         </span>
         <button
           onClick={onClose}
-          className="text-stone hover:text-warm-pearl px-2 py-1 rounded bg-white/5"
+          className="text-muted hover:text-warm-pearl px-2 py-1 rounded bg-[var(--glass-surface)]"
         >
           Close
         </button>
@@ -63,41 +63,41 @@ export const RawSignalDebugger: React.FC<RawSignalDebuggerProps> = ({
 
       <div className="grid grid-cols-2 gap-2 mb-3">
         <div>
-          <span className="text-stone">ALGORITHM:</span> {result?.algorithmVersion ?? (mode === 'BIO_AURA' ? 'rPPG_v1.0' : 'cPPG_v1.0')}
+          <span className="text-muted">ALGORITHM:</span> {result?.algorithmVersion ?? (mode === 'BIO_AURA' ? 'rPPG_v1.0' : 'cPPG_v1.0')}
         </div>
         <div>
-          <span className="text-stone">FPS:</span> {fps.toFixed(1)}
+          <span className="text-muted">FPS:</span> {fps.toFixed(1)}
         </div>
         <div>
-          <span className="text-stone">FRAMES:</span> {frameCount}
+          <span className="text-muted">FRAMES:</span> {frameCount}
         </div>
         <div>
-          <span className="text-stone">QUALITY:</span>{' '}
+          <span className="text-muted">QUALITY:</span>{' '}
           <span className={result?.quality === 'GOOD' ? 'text-signal-teal' : 'text-signal-amber'}>
             {result?.quality ?? 'UNKNOWN'}
           </span>
         </div>
         <div>
-          <span className="text-stone">MOTION SCORE:</span> {result?.motionScore?.toFixed(3) ?? '0.000'}
+          <span className="text-muted">MOTION SCORE:</span> {result?.motionScore?.toFixed(3) ?? '0.000'}
         </div>
         <div>
-          <span className="text-stone">CONFIDENCE:</span> {result?.confidence ? `${Math.round(result.confidence * 100)}%` : '0%'}
+          <span className="text-muted">CONFIDENCE:</span> {result?.confidence ? `${Math.round(result.confidence * 100)}%` : '0%'}
         </div>
         {mode === 'PULSE_TOUCH' && (
           <>
             <div>
-              <span className="text-stone">TORCH SUPP:</span> {torchSupported ? 'YES' : 'NO'}
+              <span className="text-muted">TORCH SUPP:</span> {torchSupported ? 'YES' : 'NO'}
             </div>
             <div>
-              <span className="text-stone">TORCH ACT:</span> {torchEnabled ? 'ON' : 'OFF'}
+              <span className="text-muted">TORCH ACT:</span> {torchEnabled ? 'ON' : 'OFF'}
             </div>
           </>
         )}
       </div>
 
       <div className="mb-2">
-        <div className="text-[10px] text-stone mb-1">FILTERED SIGNAL WAVEFORM</div>
-        <canvas ref={canvasRef} width={300} height={60} className="w-full h-15 rounded bg-black/50 border border-white/5" />
+        <div className="text-[10px] text-muted mb-1">FILTERED SIGNAL WAVEFORM</div>
+        <canvas ref={canvasRef} width={300} height={60} className="w-full h-15 rounded bg-base/80 border border-[var(--glass-border)]" />
       </div>
 
       {result?.reason && (

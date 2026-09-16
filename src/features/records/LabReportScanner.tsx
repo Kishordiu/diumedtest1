@@ -149,10 +149,10 @@ export default function LabReportScanner() {
   }
 
   return (
-    <div className="min-h-full bg-mineral-black text-stone flex flex-col" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+    <div className="min-h-full bg-mineral-black text-muted flex flex-col" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
       {/* Header */}
-      <div className="flex items-center gap-3 px-5 pt-4 pb-4 border-b border-white/5 relative z-10 bg-mineral-black">
-        <button onClick={() => navigate(-1)} className="text-muted-slate hover:text-stone transition-colors">
+      <div className="flex items-center gap-3 px-5 pt-4 pb-4 border-b border-[var(--glass-border)] relative z-10 bg-mineral-black">
+        <button onClick={() => navigate(-1)} className="text-muted-slate hover:text-muted transition-colors">
           <ArrowLeft size={20} />
         </button>
         <h1 className="text-warm-pearl font-semibold text-lg">Document Scanner</h1>
@@ -166,7 +166,7 @@ export default function LabReportScanner() {
               <FileText size={32} />
             </div>
             <h2 className="text-warm-pearl text-xl mb-3">Lab Report Extraction</h2>
-            <div className="bg-white/5 rounded-2xl p-4 mb-8 text-left max-w-sm">
+            <div className="bg-[var(--glass-surface)] rounded-2xl p-4 mb-8 text-left max-w-sm">
               <p className="text-muted-slate text-sm mb-3">
                 Your lab report contains sensitive health information.
               </p>
@@ -189,9 +189,9 @@ export default function LabReportScanner() {
               Fit the complete report inside the frame. Keep the page flat and well lit.
             </p>
 
-            <div className="w-full aspect-[3/4] border-2 border-dashed border-white/10 rounded-xl mb-6 flex flex-col items-center justify-center bg-deep-graphite/50 relative overflow-hidden">
-              <Camera size={48} className="text-white/20 mb-2" />
-              <p className="text-white/40 text-sm">Align Document Here</p>
+            <div className="w-full aspect-[3/4] border-2 border-dashed border-[var(--glass-border)] rounded-xl mb-6 flex flex-col items-center justify-center bg-deep-graphite/50 relative overflow-hidden">
+              <Camera size={48} className="text-muted mb-2" />
+              <p className="text-muted text-sm">Align Document Here</p>
               <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-signal-teal/50 rounded-tl-lg" />
               <div className="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-signal-teal/50 rounded-tr-lg" />
               <div className="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-signal-teal/50 rounded-bl-lg" />
@@ -229,13 +229,13 @@ export default function LabReportScanner() {
 
         {state === 'SCANNING' && (
           <div className="flex flex-col h-[65vh]">
-            <div className="relative flex-1 rounded-xl overflow-hidden bg-deep-graphite/50 mb-6 border border-white/10 shadow-xl">
+            <div className="relative flex-1 rounded-xl overflow-hidden bg-deep-graphite/50 mb-6 border border-[var(--glass-border)] shadow-xl">
               {capturedImage && (
                 <img src={capturedImage} alt="Captured Document" className="absolute inset-0 w-full h-full object-cover opacity-50" />
               )}
               <div className="absolute inset-0 bg-mineral-black/40 backdrop-blur-sm flex flex-col items-center justify-center">
-                <div className="w-12 h-12 border-2 border-white/10 border-t-signal-teal rounded-full animate-spin mb-6" />
-                <div className="flex flex-col gap-2 font-mono bg-mineral-black/90 p-4 rounded-xl border border-white/5">
+                <div className="w-12 h-12 border-2 border-[var(--glass-border)] border-t-signal-teal rounded-full animate-spin mb-6" />
+                <div className="flex flex-col gap-2 font-mono bg-mineral-black/90 p-4 rounded-xl border border-[var(--glass-border)]">
                   <div className="flex items-center gap-2 text-signal-teal text-xs">
                     <span>[OK]</span> <span>DOCUMENT CAPTURED</span>
                   </div>
@@ -247,7 +247,7 @@ export default function LabReportScanner() {
             </div>
             
             <div className="text-center px-4">
-              <p className="text-stone text-sm mb-1">Analyzing Document</p>
+              <p className="text-muted text-sm mb-1">Analyzing Document</p>
               <p className="text-muted-slate text-xs">Please wait while the AI extracts your results.</p>
             </div>
           </div>
@@ -306,8 +306,8 @@ export default function LabReportScanner() {
             })()}
 
             {parsedData.extractionWarnings && parsedData.extractionWarnings.length > 0 && (
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-6">
-                <h3 className="text-stone text-sm font-medium mb-2 flex items-center gap-2">
+              <div className="bg-[var(--glass-surface)] border border-[var(--glass-border)] rounded-2xl p-4 mb-6">
+                <h3 className="text-muted text-sm font-medium mb-2 flex items-center gap-2">
                   <Info size={16} /> Extraction Warnings
                 </h3>
                 <ul className="text-xs text-muted-slate list-disc list-inside">
@@ -316,7 +316,7 @@ export default function LabReportScanner() {
               </div>
             )}
 
-            <div className="bg-deep-graphite rounded-3xl divide-y divide-white/5 border border-white/5 overflow-hidden shadow-xl shadow-black/20">
+            <div className="bg-deep-graphite rounded-3xl divide-y divide-[var(--glass-border)] border border-[var(--glass-border)] overflow-hidden shadow-xl shadow-black/20">
               {parsedData.biomarkers.map((b, i) => (
                 <div key={i} className="p-4 flex flex-col gap-3">
                   <div className="flex items-center justify-between">
@@ -324,7 +324,7 @@ export default function LabReportScanner() {
                       <p className="text-warm-pearl font-medium flex items-center gap-2">
                         {b.name}
                         {b.status === 'UNKNOWN' && (
-                          <span className="text-[10px] bg-white/10 text-stone px-1.5 py-0.5 rounded uppercase">Review Required</span>
+                          <span className="text-[10px] bg-[var(--glass-surface)] text-muted px-1.5 py-0.5 rounded uppercase">Review Required</span>
                         )}
                       </p>
                       <p className="text-muted-slate text-xs mt-1">Ref: {b.reference_range || 'Unknown'}</p>
@@ -335,7 +335,7 @@ export default function LabReportScanner() {
                         <input 
                           type="number" 
                           step="any"
-                          className="w-20 bg-mineral-black border border-white/10 rounded px-2 py-1 text-warm-pearl text-right"
+                          className="w-20 bg-mineral-black border border-[var(--glass-border)] rounded px-2 py-1 text-warm-pearl text-right"
                           value={editValue}
                           onChange={(e) => setEditValue(e.target.value)}
                         />
@@ -344,7 +344,7 @@ export default function LabReportScanner() {
                     ) : (
                       <div className="text-right flex flex-col items-end gap-1">
                         <div className="flex items-baseline gap-1">
-                          <span className={`text-xl font-light ${(b.status === 'HIGH' || b.status === 'LOW') ? 'text-signal-amber' : 'text-stone'}`}>{b.value}</span>
+                          <span className={`text-xl font-light ${(b.status === 'HIGH' || b.status === 'LOW') ? 'text-signal-amber' : 'text-muted'}`}>{b.value}</span>
                           <span className="text-[10px] text-muted-slate uppercase tracking-wider">{b.unit}</span>
                         </div>
                         {(b.status === 'HIGH' || b.status === 'LOW') && (
@@ -355,12 +355,12 @@ export default function LabReportScanner() {
                   </div>
                   
                   {/* Provenance and Edit Controls */}
-                  <div className="flex items-center justify-between pt-3 border-t border-white/5 mt-1">
+                  <div className="flex items-center justify-between pt-3 border-t border-[var(--glass-border)] mt-1">
                     <div className="text-[10px] text-muted-slate font-mono overflow-hidden text-ellipsis whitespace-nowrap max-w-[220px] bg-mineral-black px-2 py-1 rounded">
                       "{b.sourceText}"
                     </div>
                     <div className="flex items-center gap-3">
-                      <button onClick={() => { setEditingIndex(i); setEditValue(String(b.value)); }} className="text-stone hover:text-warm-pearl transition-colors">
+                      <button onClick={() => { setEditingIndex(i); setEditValue(String(b.value)); }} className="text-muted hover:text-warm-pearl transition-colors">
                         <Edit2 size={14} />
                       </button>
                       <button onClick={() => handleRemove(i)} className="text-emergency-red/80 hover:text-emergency-red transition-colors">

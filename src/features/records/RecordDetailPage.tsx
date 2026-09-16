@@ -66,10 +66,10 @@ export default function RecordDetailPage() {
   return (
     <div className="min-h-full bg-mineral-black" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
       {/* Header */}
-      <div className="flex items-center gap-3 px-5 pt-4 pb-4 border-b border-white/5">
+      <div className="flex items-center gap-3 px-5 pt-4 pb-4 border-b border-[var(--glass-border)]">
         <button
           onClick={() => navigate(-1)}
-          className="text-muted-slate hover:text-stone transition-colors"
+          className="text-muted-slate hover:text-muted transition-colors"
           aria-label="Go back"
         >
           <ArrowLeft size={20} />
@@ -86,7 +86,7 @@ export default function RecordDetailPage() {
         >
           <div className="flex items-center gap-2 mb-3">
             <Activity size={16} className="text-signal-teal" />
-            <p className="text-stone text-sm capitalize">
+            <p className="text-muted text-sm capitalize">
               {measurement.measurement_type.replace('_', ' ')}
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function RecordDetailPage() {
         </motion.div>
 
         {/* Details */}
-        <div className="bg-deep-graphite rounded-card divide-y divide-white/5 border border-white/5">
+        <div className="bg-deep-graphite rounded-card divide-y divide-[var(--glass-border)] border border-[var(--glass-border)]">
           <div className="flex items-center justify-between px-4 py-3">
             <p className="text-muted-slate text-sm">Quality</p>
             <p className={`text-sm font-medium ${qualityColors[measurement.quality] ?? 'text-warm-pearl'}`}>
@@ -151,14 +151,14 @@ export default function RecordDetailPage() {
         </div>
 
         {meta?.signal_snapshot && Array.isArray(meta.signal_snapshot) && (
-          <div className="bg-deep-graphite rounded-card p-4 border border-white/5">
+          <div className="bg-deep-graphite rounded-card p-4 border border-[var(--glass-border)]">
             <p className="text-muted-slate text-sm mb-3">Signal Snapshot</p>
             <LiveSignalGraph waveform={meta.signal_snapshot} color="#53B7A8" height={60} />
           </div>
         )}
 
         {/* Disclaimer */}
-        <div className="bg-deep-graphite rounded-card p-4 border border-white/5">
+        <div className="bg-deep-graphite rounded-card p-4 border border-[var(--glass-border)]">
           <p className="text-muted-slate text-xs leading-relaxed italic">
             Optical estimate — not a medical diagnosis. Accuracy depends on lighting, motion, skin tone, and camera quality.
           </p>

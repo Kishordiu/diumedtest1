@@ -78,12 +78,12 @@ export function VisionInputStage({
   return (
     <div className="flex flex-col items-center w-full">
       {/* Segmented Control */}
-      <div className="flex bg-mineral-black border border-white/10 rounded-full p-1 mb-6 relative z-10">
+      <div className="flex bg-mineral-black border border-[var(--glass-border)] rounded-full p-1 mb-6 relative z-10">
         <button
           onClick={() => onModeChange('LIVE')}
           disabled={isProcessing}
           className={`flex items-center gap-2 px-6 py-2 rounded-full text-xs font-semibold tracking-wide transition-colors ${
-            state.mode === 'LIVE' ? 'bg-deep-graphite text-warm-pearl shadow-md' : 'text-muted-slate hover:text-stone'
+            state.mode === 'LIVE' ? 'bg-deep-graphite text-warm-pearl shadow-md' : 'text-muted-slate hover:text-muted'
           }`}
         >
           <Camera size={14} /> LIVE SCAN
@@ -92,7 +92,7 @@ export function VisionInputStage({
           onClick={() => onModeChange('UPLOAD')}
           disabled={isProcessing}
           className={`flex items-center gap-2 px-6 py-2 rounded-full text-xs font-semibold tracking-wide transition-colors ${
-            state.mode === 'UPLOAD' ? 'bg-deep-graphite text-warm-pearl shadow-md' : 'text-muted-slate hover:text-stone'
+            state.mode === 'UPLOAD' ? 'bg-deep-graphite text-warm-pearl shadow-md' : 'text-muted-slate hover:text-muted'
           }`}
         >
           <Upload size={14} /> UPLOAD
@@ -116,7 +116,7 @@ export function VisionInputStage({
             />
           </CameraLensInstrument>
           
-          <p className="text-sm text-stone text-center mb-6">{state.errorMessage || guidanceText}</p>
+          <p className="text-sm text-muted text-center mb-6">{state.errorMessage || guidanceText}</p>
 
           {state.status === 'CAMERA_READY' && !isProcessing && (
             <button 
@@ -151,19 +151,19 @@ export function VisionInputStage({
           ) : (
             <div 
               onClick={triggerFilePicker}
-              className="w-48 h-64 border-2 border-dashed border-white/20 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:border-signal-teal/50 hover:bg-white/5 transition-all mb-8"
+              className="w-48 h-64 border-2 border-dashed border-[var(--glass-border)] rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:border-signal-teal/50 hover:bg-[var(--glass-surface)] transition-all mb-8"
             >
-              <ImageIcon size={32} className="text-white/30 mb-3" />
-              <p className="text-sm text-stone font-medium text-center px-4">Tap to select an image</p>
+              <ImageIcon size={32} className="text-muted mb-3" />
+              <p className="text-sm text-muted font-medium text-center px-4">Tap to select an image</p>
             </div>
           )}
 
-          <p className="text-sm text-stone text-center mb-6">{state.errorMessage || "Use a clear, steady photo."}</p>
+          <p className="text-sm text-muted text-center mb-6">{state.errorMessage || "Use a clear, steady photo."}</p>
 
           {state.status !== 'IMAGE_LOADED' && !isProcessing && (
             <button 
               onClick={triggerFilePicker}
-              className="bg-deep-graphite border border-white/10 text-warm-pearl font-semibold rounded-full px-8 py-3 hover:bg-white/5 transition-colors"
+              className="bg-deep-graphite border border-[var(--glass-border)] text-warm-pearl font-semibold rounded-full px-8 py-3 hover:bg-[var(--glass-surface)] transition-colors"
             >
               Choose Image
             </button>
@@ -172,7 +172,7 @@ export function VisionInputStage({
             <div className="flex gap-4">
               <button 
                 onClick={triggerFilePicker}
-                className="bg-transparent border border-white/20 text-stone font-semibold rounded-full px-6 py-2 hover:bg-white/5 transition-colors text-sm"
+                className="bg-transparent border border-[var(--glass-border)] text-muted font-semibold rounded-full px-6 py-2 hover:bg-[var(--glass-surface)] transition-colors text-sm"
               >
                 Retake
               </button>

@@ -63,9 +63,9 @@ export default function BenchmarkMode() {
   const metrics = calculateMetrics()
 
   return (
-    <div className="min-h-screen bg-mineral-black text-stone flex flex-col p-5" style={{ paddingTop: 'env(safe-area-inset-top, 20px)' }}>
+    <div className="min-h-screen bg-mineral-black text-muted flex flex-col p-5" style={{ paddingTop: 'env(safe-area-inset-top, 20px)' }}>
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate(-1)} className="text-muted-slate hover:text-stone">
+        <button onClick={() => navigate(-1)} className="text-muted-slate hover:text-muted">
           <ArrowLeft size={20} />
         </button>
         <div>
@@ -74,7 +74,7 @@ export default function BenchmarkMode() {
         </div>
       </div>
 
-      <div className="bg-raised-graphite rounded-xl p-5 mb-6 border border-white/5">
+      <div className="bg-raised-graphite rounded-xl p-5 mb-6 border border-[var(--glass-border)]">
         <h2 className="text-warm-pearl font-medium mb-4 text-sm tracking-wide">REFERENCE DATA</h2>
         <div className="flex gap-4 items-end">
           <div className="flex-1">
@@ -83,7 +83,7 @@ export default function BenchmarkMode() {
               type="number" 
               value={referenceInput}
               onChange={e => setReferenceInput(e.target.value)}
-              className="w-full bg-mineral-black border border-white/10 rounded-lg px-4 py-3 text-warm-pearl focus:outline-none focus:border-signal-teal font-mono text-xl"
+              className="w-full bg-mineral-black border border-[var(--glass-border)] rounded-lg px-4 py-3 text-warm-pearl focus:outline-none focus:border-signal-teal font-mono text-xl"
               disabled={isRunning}
             />
           </div>
@@ -97,7 +97,7 @@ export default function BenchmarkMode() {
         </div>
       </div>
 
-      <div className="bg-material-glass rounded-xl p-5 mb-6 border border-white/5 shadow-xl relative overflow-hidden">
+      <div className="bg-material-glass rounded-xl p-5 mb-6 border border-[var(--glass-border)] shadow-xl relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
         <h2 className="text-warm-pearl font-medium mb-4 text-sm tracking-wide relative z-10 flex items-center gap-2">
           <Activity size={16} className="text-signal-teal" />
@@ -120,9 +120,9 @@ export default function BenchmarkMode() {
         </div>
       </div>
 
-      <div className="flex-1 bg-raised-graphite rounded-xl p-5 border border-white/5 flex flex-col min-h-[300px]">
+      <div className="flex-1 bg-raised-graphite rounded-xl p-5 border border-[var(--glass-border)] flex flex-col min-h-[300px]">
         <h2 className="text-warm-pearl font-medium mb-4 text-sm tracking-wide">CHART (Reference vs Estimate)</h2>
-        <div className="flex-1 flex items-end gap-1 relative border-b border-l border-white/10 p-2">
+        <div className="flex-1 flex items-end gap-1 relative border-b border-l border-[var(--glass-border)] p-2">
           {records.slice(-50).map((r, i) => (
             <div key={i} className="flex-1 relative h-full flex items-end justify-center group">
               <div 

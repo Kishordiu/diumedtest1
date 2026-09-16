@@ -26,7 +26,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-mineral-black text-stone flex flex-col items-center justify-center p-6 text-center">
+        <div className="min-h-screen bg-mineral-black text-muted flex flex-col items-center justify-center p-6 text-center">
           <div className="w-16 h-16 bg-emergency-red/10 rounded-full flex items-center justify-center mb-6">
             <AlertTriangle className="text-emergency-red" size={32} />
           </div>
@@ -37,13 +37,13 @@ export class ErrorBoundary extends React.Component<Props, State> {
           <div className="space-y-4 w-full max-w-[280px]">
             <button 
               onClick={() => window.location.reload()} 
-              className="w-full bg-raised-graphite border border-white/10 text-warm-pearl py-4 rounded-full text-sm font-medium hover:bg-white/5 transition-colors"
+              className="w-full bg-raised-graphite border border-[var(--glass-border)] text-warm-pearl py-4 rounded-full text-sm font-medium hover:bg-[var(--glass-surface)] transition-colors"
             >
               TRY AGAIN
             </button>
             <button 
               onClick={() => window.location.href = '/'} 
-              className="w-full bg-transparent text-stone py-4 rounded-full text-sm font-medium hover:text-warm-pearl transition-colors"
+              className="w-full bg-transparent text-muted py-4 rounded-full text-sm font-medium hover:text-warm-pearl transition-colors"
             >
               GO HOME
             </button>

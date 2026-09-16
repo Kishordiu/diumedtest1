@@ -14,10 +14,10 @@ interface AlertProps {
 export function Alert({ variant, title, message, className = '', action }: AlertProps) {
   const styles = {
     INFO: {
-      bg: 'bg-white/5',
-      border: 'border-white/10',
+      bg: 'bg-[var(--glass-surface)]',
+      border: 'border-[var(--glass-border)]',
       text: 'text-warm-pearl',
-      icon: <Info size={20} className="text-stone" />,
+      icon: <Info size={20} className="text-muted" />,
       title: 'text-warm-pearl'
     },
     SUCCESS: {
@@ -44,9 +44,9 @@ export function Alert({ variant, title, message, className = '', action }: Alert
     EMERGENCY: {
       bg: 'bg-emergency-red',
       border: 'border-emergency-red',
-      text: 'text-white',
-      icon: <ShieldAlert size={20} className="text-white" />,
-      title: 'text-white'
+      text: 'text-primary',
+      icon: <ShieldAlert size={20} className="text-primary" />,
+      title: 'text-primary'
     }
   }
 

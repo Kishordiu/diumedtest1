@@ -77,7 +77,7 @@ export default function AdminPage() {
       className="min-h-full bg-mineral-black"
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
-      <div className="px-5 pt-5 pb-4 border-b border-white/5">
+      <div className="px-5 pt-5 pb-4 border-b border-[var(--glass-border)]">
         <h1 className="text-warm-pearl text-xl font-semibold">{t('admin.title')}</h1>
         <p className="text-muted-slate text-xs mt-0.5">Operations console · Admin view</p>
       </div>
@@ -86,14 +86,14 @@ export default function AdminPage() {
         {metricItems.map(({ label, value, icon: Icon }) => (
           <div
             key={label}
-            className="bg-deep-graphite rounded-card p-4 border border-white/5"
+            className="bg-deep-graphite rounded-card p-4 border border-[var(--glass-border)]"
           >
             <div className="flex items-center gap-2 mb-2">
               <Icon size={14} className="text-muted-slate" />
               <p className="text-muted-slate text-xs">{label}</p>
             </div>
             {loading ? (
-              <div className="h-8 w-12 bg-white/5 rounded animate-pulse" />
+              <div className="h-8 w-12 bg-[var(--glass-surface)] rounded animate-pulse" />
             ) : (
               <p className="readout text-warm-pearl text-2xl font-thin">
                 {value ?? '—'}
@@ -104,7 +104,7 @@ export default function AdminPage() {
       </div>
 
       <div className="px-5 mt-6">
-        <div className="bg-deep-graphite rounded-card p-4 border border-white/5">
+        <div className="bg-deep-graphite rounded-card p-4 border border-[var(--glass-border)]">
           <p className="text-muted-slate text-xs leading-relaxed">
             Metrics reflect live database counts. No synthetic or cached data.
             Empty values indicate zero records, not missing data.

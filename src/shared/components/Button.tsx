@@ -26,13 +26,13 @@ export default function Button({
     primary:
       'bg-signal-teal text-mineral-black shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),_0_2px_10px_rgba(87,185,167,0.3)] hover:bg-[#4AA898] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),_0_4px_14px_rgba(87,185,167,0.4)] transform hover:-translate-y-[1px]',
     secondary:
-      'bg-raised-graphite text-warm-pearl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),_0_2px_8px_rgba(0,0,0,0.2)] hover:bg-[#2A3136] hover:border-white/20',
+      'bg-raised-graphite text-warm-pearl border border-[var(--glass-border)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),_0_2px_8px_rgba(0,0,0,0.2)] hover:bg-[#2A3136] hover:border-[var(--glass-border)]',
     ghost:
-      'text-warm-pearl hover:bg-white/5',
+      'text-warm-pearl hover:bg-[var(--glass-surface)]',
     danger:
       'bg-emergency-red/10 text-emergency-red border border-emergency-red/20 shadow-[0_2px_8px_rgba(214,91,85,0.1)] hover:bg-emergency-red/20',
     emergency:
-      'bg-emergency-red text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),_0_4px_16px_rgba(214,91,85,0.4)] hover:bg-[#C94D47] transform hover:-translate-y-[1px]',
+      'bg-emergency-red text-primary shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),_0_4px_16px_rgba(214,91,85,0.4)] hover:bg-[#C94D47] transform hover:-translate-y-[1px]',
   }
 
   const sizes = {

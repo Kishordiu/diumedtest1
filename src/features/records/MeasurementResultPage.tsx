@@ -37,7 +37,7 @@ export function MeasurementResultPage() {
 
   if (!result) {
     return (
-      <div className="min-h-full bg-mineral-black text-stone flex flex-col items-center justify-center p-6">
+      <div className="min-h-full bg-mineral-black text-muted flex flex-col items-center justify-center p-6">
         <ShieldCheck className="text-muted-slate mb-4" size={48} />
         <p className="text-center mb-6 text-warm-pearl">No measurement data found.</p>
         <Button variant="secondary" onClick={() => navigate('/bio-aura')}>Return to Scanner</Button>
@@ -87,8 +87,8 @@ export function MeasurementResultPage() {
   return (
     <div className="min-h-full bg-mineral-black flex flex-col pb-24" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
       {/* Header */}
-      <div className="flex items-center gap-3 px-5 pt-4 pb-4 bg-mineral-black relative z-10 border-b border-white/5">
-        <button onClick={() => navigate(-1)} className="text-muted-slate hover:text-stone transition-colors">
+      <div className="flex items-center gap-3 px-5 pt-4 pb-4 bg-mineral-black relative z-10 border-b border-[var(--glass-border)]">
+        <button onClick={() => navigate(-1)} className="text-muted-slate hover:text-muted transition-colors">
           <ArrowLeft size={20} />
         </button>
         <div>
@@ -104,12 +104,12 @@ export function MeasurementResultPage() {
       <div className="flex-1 px-5 py-6 space-y-6">
         
         {/* Primary Instrument Result */}
-        <div className="bg-deep-graphite rounded-3xl p-8 border border-white/5 relative overflow-hidden">
+        <div className="bg-deep-graphite rounded-3xl p-8 border border-[var(--glass-border)] relative overflow-hidden">
           <div className="flex flex-col items-center justify-center text-center">
             
             <button 
               onClick={speakResult}
-              className={`absolute top-6 right-6 p-2 rounded-full border border-white/10 transition-colors ${isSpeaking ? 'bg-signal-teal/20 text-signal-teal' : 'bg-mineral-black text-muted-slate hover:text-stone'}`}
+              className={`absolute top-6 right-6 p-2 rounded-full border border-[var(--glass-border)] transition-colors ${isSpeaking ? 'bg-signal-teal/20 text-signal-teal' : 'bg-mineral-black text-muted-slate hover:text-muted'}`}
               aria-label="Read result aloud"
             >
               <Volume2 size={20} className={isSpeaking ? 'animate-pulse' : ''} />
@@ -121,9 +121,9 @@ export function MeasurementResultPage() {
               </span>
               <span className="text-xl text-muted-slate font-medium">BPM</span>
             </div>
-            <p className="text-stone tracking-wide mb-8 text-sm">Measured Heart Rate</p>
+            <p className="text-muted tracking-wide mb-8 text-sm">Measured Heart Rate</p>
 
-            <div className="w-full bg-mineral-black/50 rounded-2xl p-4 flex justify-between items-center border border-white/5">
+            <div className="w-full bg-mineral-black/50 rounded-2xl p-4 flex justify-between items-center border border-[var(--glass-border)]">
               <div className="text-center flex-1">
                 <p className="text-[10px] text-muted-slate uppercase tracking-wider mb-1">Signal Quality</p>
                 <div className="flex items-center justify-center gap-1.5">
@@ -133,17 +133,17 @@ export function MeasurementResultPage() {
                   </p>
                 </div>
               </div>
-              <div className="w-px h-8 bg-white/10" />
+              <div className="w-px h-8 bg-[var(--glass-surface)]" />
               <div className="text-center flex-1">
                 <p className="text-[10px] text-muted-slate uppercase tracking-wider mb-1">Confidence</p>
-                <p className="text-sm font-medium text-stone">
+                <p className="text-sm font-medium text-muted">
                   {Math.round(result.confidence * 100)}%
                 </p>
               </div>
-              <div className="w-px h-8 bg-white/10" />
+              <div className="w-px h-8 bg-[var(--glass-surface)]" />
               <div className="text-center flex-1">
                 <p className="text-[10px] text-muted-slate uppercase tracking-wider mb-1">Duration</p>
-                <p className="text-sm font-medium text-stone">
+                <p className="text-sm font-medium text-muted">
                   {result.durationSeconds.toFixed(1)}s
                 </p>
               </div>
@@ -152,7 +152,7 @@ export function MeasurementResultPage() {
         </div>
 
         {/* Captured Signal */}
-        <div className="bg-deep-graphite rounded-3xl p-6 border border-white/5">
+        <div className="bg-deep-graphite rounded-3xl p-6 border border-[var(--glass-border)]">
           <div className="flex items-center justify-between mb-4">
              <div>
                 <p className="text-warm-pearl text-sm font-medium">Captured Optical Signal</p>
@@ -161,7 +161,7 @@ export function MeasurementResultPage() {
              <Activity size={16} className="text-signal-teal/70" />
           </div>
           
-          <div className="h-20 bg-mineral-black/50 rounded-xl overflow-hidden border border-white/5 p-2 relative">
+          <div className="h-20 bg-mineral-black/50 rounded-xl overflow-hidden border border-[var(--glass-border)] p-2 relative">
             {result.waveformSnapshot?.length > 0 ? (
               <LiveSignalGraph waveform={result.waveformSnapshot} color="#53B7A8" height={64} />
             ) : (
@@ -173,28 +173,28 @@ export function MeasurementResultPage() {
         </div>
 
         {/* Technical Details */}
-        <div className="bg-deep-graphite rounded-3xl p-6 border border-white/5 space-y-4">
-           <p className="text-[10px] text-muted-slate font-mono uppercase tracking-widest mb-2 border-b border-white/5 pb-2">Technical Details</p>
+        <div className="bg-deep-graphite rounded-3xl p-6 border border-[var(--glass-border)] space-y-4">
+           <p className="text-[10px] text-muted-slate font-mono uppercase tracking-widest mb-2 border-b border-[var(--glass-border)] pb-2">Technical Details</p>
            
            <div className="flex justify-between items-center text-sm">
              <span className="text-muted-slate">Source</span>
-             <span className="text-stone font-medium text-right">{isPulseTouch ? 'Contact (rear + torch)' : 'Remote (front)'}</span>
+             <span className="text-muted font-medium text-right">{isPulseTouch ? 'Contact (rear + torch)' : 'Remote (front)'}</span>
            </div>
            <div className="flex justify-between items-center text-sm">
              <span className="text-muted-slate">Algorithm</span>
-             <span className="text-stone font-medium text-right font-mono text-[10px] bg-white/5 px-2 py-0.5 rounded">{result.algorithmVersion}</span>
+             <span className="text-muted font-medium text-right font-mono text-[10px] bg-[var(--glass-surface)] px-2 py-0.5 rounded">{result.algorithmVersion}</span>
            </div>
            <div className="flex justify-between items-center text-sm">
              <span className="text-muted-slate">Sampling</span>
-             <span className="text-stone font-medium text-right">{result.samplingRate.toFixed(1)} fps</span>
+             <span className="text-muted font-medium text-right">{result.samplingRate.toFixed(1)} fps</span>
            </div>
         </div>
 
         {/* Disclaimer */}
-        <div className="bg-mineral-black/50 border border-white/5 rounded-2xl p-4 flex gap-3">
+        <div className="bg-mineral-black/50 border border-[var(--glass-border)] rounded-2xl p-4 flex gap-3">
           <ShieldCheck className="text-muted-slate/50 shrink-0 mt-0.5" size={18} />
           <p className="text-xs text-muted-slate leading-relaxed">
-            Your phone captured an optical pulse signal during this session. This is an optical estimate and is <strong className="text-stone font-normal">not a medical diagnosis</strong>.
+            Your phone captured an optical pulse signal during this session. This is an optical estimate and is <strong className="text-muted font-normal">not a medical diagnosis</strong>.
           </p>
         </div>
 

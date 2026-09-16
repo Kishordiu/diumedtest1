@@ -15,7 +15,7 @@ export function CameraLensInstrument({ phase, children, overlay, shape = 'circle
   const isError = phase === 'TIMEOUT' || phase === 'CAMERA_UNAVAILABLE' || phase === 'PERMISSION_DENIED' || phase === 'TORCH_UNAVAILABLE';
   const isSuccess = phase === 'RESULT_READY';
 
-  let borderColor = 'border-white/5';
+  let borderColor = 'border-[var(--glass-border)]';
   let glowColor = 'shadow-[0_0_20px_rgba(255,255,255,0.05)]';
   let innerGlow = '';
   

@@ -4,14 +4,63 @@ import i18n from './i18n/i18n'
 
 class TTSService {
   private audioContext: AudioContext | null = null
+  private unlocked = false
 
   constructor() {
-    // Only create AudioContext on first user interaction or when needed
+    // Register a one-time unlock listener for AudioContext on first user gesture
+    // This is required in Android WebViews where audio is blocked until interaction
+    if (typeof window !== 'undefined') {
+      const unlock = () => {
+        this.unlockAudio()
+        window.removeEventListener('touchstart', unlock, true)
+        window.removeEventListener('click', unlock, true)
+      }
+      window.addEventListener('touchstart', unlock, true)
+      window.addEventListener('click', unlock, true)
+
+      // Pre-load speech synthesis voices (needed on some Android WebViews)
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices()
+        window.speechSynthesis.onvoiceschanged = () => {
+          window.speechSynthesis.getVoices()
+        }
+      }
+    }
+  }
+
+  private unlockAudio() {
+    if (this.unlocked) return
+    this.unlocked = true
+
+    try {
+      // Create and immediately resume AudioContext on user gesture
+      this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+      
+      // Play a silent buffer to "warm up" the audio pipeline
+      const buffer = this.audioContext.createBuffer(1, 1, 22050)
+      const source = this.audioContext.createBufferSource()
+      source.buffer = buffer
+      source.connect(this.audioContext.destination)
+      source.start(0)
+      
+      // Resume in case it was created in a suspended state
+      if (this.audioContext.state === 'suspended') {
+        this.audioContext.resume()
+      }
+
+      log.tts('Audio unlocked successfully')
+    } catch (err) {
+      log.error('TTS', 'Failed to unlock audio', err)
+    }
   }
 
   private initAudioContext() {
     if (!this.audioContext) {
       this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+    }
+    // Always try to resume in case it's suspended
+    if (this.audioContext.state === 'suspended') {
+      this.audioContext.resume()
     }
   }
 
@@ -47,6 +96,12 @@ class TTSService {
 
   private async playBase64(base64: string) {
     if (!this.audioContext) return
+    
+    // Resume if suspended
+    if (this.audioContext.state === 'suspended') {
+      await this.audioContext.resume()
+    }
+
     const binaryStr = window.atob(base64)
     const len = binaryStr.length
     const bytes = new Uint8Array(len)
@@ -62,6 +117,8 @@ class TTSService {
       source.start(0)
     } catch (err) {
       log.error('TTS', 'Failed to play decoded audio', err)
+      // Final fallback: try browser speech synthesis
+      this.browserFallback('Audio playback failed', 'en')
     }
   }
 
@@ -81,6 +138,9 @@ class TTSService {
     }
     
     utterance.lang = langMap[lang] || 'en-US'
+    utterance.rate = 0.9
+    utterance.pitch = 1.0
+    utterance.volume = 1.0
     
     // Try to find a good voice
     const voices = window.speechSynthesis.getVoices()

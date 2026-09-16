@@ -122,14 +122,14 @@ export default function ScleraScreeningPage() {
   const isResultReady = !!result
 
   return (
-    <div className="min-h-full bg-mineral-black text-stone flex flex-col" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
-      <div className="flex items-center gap-3 px-5 pt-4 pb-4 border-b border-white/5 bg-mineral-black z-10 relative flex-shrink-0">
-        <button onClick={() => { cleanup(); navigate(-1); }} className="text-muted-slate hover:text-stone transition-colors">
+    <div className="min-h-full bg-mineral-black text-muted flex flex-col" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+      <div className="flex items-center gap-3 px-5 pt-4 pb-4 border-b border-[var(--glass-border)] bg-mineral-black z-10 relative flex-shrink-0">
+        <button onClick={() => { cleanup(); navigate(-1); }} className="text-muted-slate hover:text-muted transition-colors">
           <ArrowLeft size={20} />
         </button>
         <div>
           <h1 className="text-warm-pearl font-semibold text-lg leading-tight">Sclera Screening</h1>
-          <p className="text-stone text-[10px] font-mono tracking-wide text-signal-teal">EXPERIMENTAL MODULE</p>
+          <p className="text-muted text-[10px] font-mono tracking-wide text-signal-teal">EXPERIMENTAL MODULE</p>
         </div>
       </div>
 
@@ -158,7 +158,7 @@ export default function ScleraScreeningPage() {
               <p className="text-warm-pearl font-medium">Image Quality Insufficient</p>
               <p className="text-emergency-red/80 text-sm">Please ensure neutral lighting and a clear, steady image.</p>
             </div>
-            <div className="w-full bg-raised-graphite rounded-xl p-4 mb-6 text-left border border-white/5 text-sm">
+            <div className="w-full bg-raised-graphite rounded-xl p-4 mb-6 text-left border border-[var(--glass-border)] text-sm">
                 <p className="text-muted-slate mb-2">Quality Gate Report:</p>
                 <div className="space-y-1 font-mono">
                   <div className="flex justify-between"><span>Brightness:</span> <span className={qualityReport.brightness >= 60 ? 'text-signal-teal' : 'text-emergency-red'}>{Math.round(qualityReport.brightness)}</span></div>
@@ -170,7 +170,7 @@ export default function ScleraScreeningPage() {
 
         {isResultReady && qualityReport && qualityReport.isSufficient && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex-1 flex flex-col">
-            <div className="bg-raised-graphite rounded-2xl p-6 mb-4 shadow-xl border border-white/5 flex-1 relative overflow-hidden">
+            <div className="bg-raised-graphite rounded-2xl p-6 mb-4 shadow-xl border border-[var(--glass-border)] flex-1 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
               
               <div className="flex items-center justify-between mb-8">
@@ -194,7 +194,7 @@ export default function ScleraScreeningPage() {
 
                   {/* Visual Gauge */}
                   {jaundiceEstimate && (
-                    <div className="w-full h-1.5 bg-mineral-black/50 rounded-full overflow-hidden relative border border-white/5 mb-1">
+                    <div className="w-full h-1.5 bg-mineral-black/50 rounded-full overflow-hidden relative border border-[var(--glass-border)] mb-1">
                        <div className="absolute inset-0 bg-gradient-to-r from-signal-teal via-signal-amber to-emergency-red opacity-30" />
                        <motion.div 
                          initial={{ left: '0%' }}
@@ -221,7 +221,7 @@ export default function ScleraScreeningPage() {
                   </div>
                 </motion.div>
 
-                <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className={`rounded-xl p-4 border flex gap-3 ${jaundiceEstimate?.screeningSignal === 'POSSIBLE_ELEVATED_BILIRUBIN' ? 'bg-emergency-red/10 border-emergency-red/20' : 'bg-mineral-black/50 border-white/5'}`}>
+                <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className={`rounded-xl p-4 border flex gap-3 ${jaundiceEstimate?.screeningSignal === 'POSSIBLE_ELEVATED_BILIRUBIN' ? 'bg-emergency-red/10 border-emergency-red/20' : 'bg-mineral-black/50 border-[var(--glass-border)]'}`}>
                    <AlertTriangle size={16} className={jaundiceEstimate?.screeningSignal === 'POSSIBLE_ELEVATED_BILIRUBIN' ? 'text-emergency-red' : 'text-signal-amber'} />
                    <p className="text-xs text-muted-slate leading-relaxed">
                      {jaundiceEstimate?.screeningSignal === 'POSSIBLE_ELEVATED_BILIRUBIN' ? 'Elevated bilirubin detected by ML model.' : 'Bilirubin levels appear normal.'} This is an experimental optical observation and not a medical diagnosis.

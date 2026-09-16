@@ -54,7 +54,7 @@ export default function OnboardingPage() {
         </div>
         <button
           onClick={() => navigate('/auth')}
-          className="text-muted-slate text-sm hover:text-stone transition-colors"
+          className="text-muted-slate text-sm hover:text-muted transition-colors"
         >
           {t('onboarding.skip')}
         </button>
@@ -70,7 +70,7 @@ export default function OnboardingPage() {
                 ? 'w-6 h-1.5 bg-signal-teal'
                 : i < step
                 ? 'w-1.5 h-1.5 bg-signal-teal/40'
-                : 'w-1.5 h-1.5 bg-white/10'
+                : 'w-1.5 h-1.5 bg-[var(--glass-surface)]'
             }`}
           />
         ))}
@@ -106,7 +106,7 @@ export default function OnboardingPage() {
                 <p className="text-soft-bone text-base leading-relaxed">
                   {t('onboarding.step1.body')}
                 </p>
-                <div className="surface-raised rounded-card p-4 border border-white/5">
+                <div className="surface-raised rounded-card p-4 border border-[var(--glass-border)]">
                   <p className="text-muted-slate text-sm">{t('onboarding.step1.note')}</p>
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function OnboardingPage() {
                   <p className="text-signal-amber text-sm font-medium mb-1">Cannot do</p>
                   <p className="text-soft-bone text-sm">{t('onboarding.step2.cannot')}</p>
                 </div>
-                <p className="text-stone text-sm leading-relaxed">{t('onboarding.step2.body')}</p>
+                <p className="text-muted text-sm leading-relaxed">{t('onboarding.step2.body')}</p>
                 <div className="surface-emergency rounded-card p-4">
                   <p className="text-emergency-red text-sm font-medium">
                     {t('onboarding.step2.warning')}
@@ -169,7 +169,7 @@ export default function OnboardingPage() {
         {isLast && (
           <button
             onClick={() => navigate('/auth')}
-            className="w-full mt-3 text-center text-muted-slate text-sm py-2 hover:text-stone transition-colors"
+            className="w-full mt-3 text-center text-muted-slate text-sm py-2 hover:text-muted transition-colors"
           >
             {t('onboarding.step3.decline')}
           </button>

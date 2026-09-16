@@ -76,24 +76,24 @@ export function DiagnosticsPanel({ title, metrics, rawSignal, filteredSignal }: 
 
 
   return (
-    <div className="fixed bottom-[80px] left-2 right-2 z-50 bg-black/80 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden font-mono text-[10px] shadow-2xl flex flex-col max-h-[50vh]">
+    <div className="fixed bottom-[80px] left-2 right-2 z-50 bg-base/80 backdrop-blur-md border border-[var(--glass-border)] rounded-xl overflow-hidden font-mono text-[10px] shadow-2xl flex flex-col max-h-[50vh]">
       <div 
-        className="flex items-center justify-between p-2 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors shrink-0"
+        className="flex items-center justify-between p-2 cursor-pointer bg-[var(--glass-surface)] hover:bg-[var(--glass-surface)] transition-colors shrink-0"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex items-center gap-2 text-stone">
+        <div className="flex items-center gap-2 text-muted">
           <Terminal size={14} />
           <span className="font-semibold uppercase tracking-wider">{title} DIAGNOSTICS</span>
         </div>
-        {isOpen ? <ChevronDown size={14} className="text-stone" /> : <ChevronUp size={14} className="text-stone" />}
+        {isOpen ? <ChevronDown size={14} className="text-muted" /> : <ChevronUp size={14} className="text-muted" />}
       </div>
       
       {isOpen && (
         <div className="flex flex-col overflow-y-auto">
           <div className="p-3 grid grid-cols-2 gap-x-4 gap-y-2 shrink-0">
             {metrics.map((m, i) => (
-              <div key={i} className="flex justify-between items-center border-b border-white/5 pb-1">
-                <span className="text-white/40">{m.label}</span>
+              <div key={i} className="flex justify-between items-center border-b border-[var(--glass-border)] pb-1">
+                <span className="text-muted">{m.label}</span>
                 <span className={`
                   ${m.status === 'good' ? 'text-signal-teal' : ''}
                   ${m.status === 'warn' ? 'text-signal-amber' : ''}
@@ -108,7 +108,7 @@ export function DiagnosticsPanel({ title, metrics, rawSignal, filteredSignal }: 
           
           {(rawSignal || filteredSignal) && (
             <div className="px-3 pb-3 shrink-0">
-              <div className="flex justify-between text-[8px] text-white/40 mb-1">
+              <div className="flex justify-between text-[8px] text-muted mb-1">
                 <span>RAW SIGNAL (WHITE)</span>
                 <span>FILTERED PPG (TEAL)</span>
               </div>
@@ -116,7 +116,7 @@ export function DiagnosticsPanel({ title, metrics, rawSignal, filteredSignal }: 
                 ref={canvasRef} 
                 width={300} 
                 height={80} 
-                className="w-full h-[80px] bg-white/5 rounded border border-white/10"
+                className="w-full h-[80px] bg-[var(--glass-surface)] rounded border border-[var(--glass-border)]"
               />
             </div>
           )}

@@ -123,8 +123,8 @@ export function BioAuraPage() {
                 </div>
               )}
               {progress.phase === 'GUIDANCE' && (
-                <div className="w-24 h-32 border-2 border-white/20 rounded-full animate-pulse flex items-center justify-center">
-                  <div className="text-[10px] text-white/50 tracking-wider">FACE</div>
+                <div className="w-24 h-32 border-2 border-[var(--glass-border)] rounded-full animate-pulse flex items-center justify-center">
+                  <div className="text-[10px] text-muted tracking-wider">FACE</div>
                 </div>
               )}
             </>

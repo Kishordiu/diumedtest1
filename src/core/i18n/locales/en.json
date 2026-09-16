@@ -60,7 +60,7 @@
       "evening": "Good evening",
       "night": "Good night"
     },
-    "question": "How do you feel today?",
+    "question": "How are you feeling?",
     "actions": {
       "measure": "Check signal",
       "triage": "Check symptoms",
@@ -69,7 +69,30 @@
     "recentActivity": "Recent activity",
     "noRecords": "No measurements yet.",
     "noRecordsHint": "Your first Bio-Aura reading will appear here.",
-    "privacy": "Data is stored securely in your account only."
+    "privacy": "Data is stored securely in your account only.",
+    "primaryActions": "Primary Actions",
+    "bioAura": "Bio-Aura",
+    "bioAuraDesc": "Facial optical estimate",
+    "pulseTouch": "Pulse Touch",
+    "pulseTouchDesc": "Finger contact estimate",
+    "triage": "Triage",
+    "triageDesc": "Describe symptoms",
+    "emergency": "Emergency",
+    "emergencyDesc": "Get help",
+    "today": "Today",
+    "noMeasurements": "No measurements yet",
+    "firstReading": "Your first optical reading will appear here.",
+    "latest": "Latest",
+    "count": "Count",
+    "avg": "Avg",
+    "range": "Range",
+    "experimentalTools": "Experimental Tools",
+    "anemiaScreening": "Anemia Screening",
+    "anemiaScreeningDesc": "Optical Assessment",
+    "scleraScreening": "Sclera Screening",
+    "scleraScreeningDesc": "Optical Assessment",
+    "labReportScanner": "Lab Report Scanner",
+    "labReportScannerDesc": "Document Extraction"
   },
   "bioAura": {
     "title": "Bio-Aura",
@@ -203,7 +226,10 @@
       "female": "Female",
       "other": "Other",
       "prefer_not_to_say": "Prefer not to say"
-    }
+    },
+    "theme": "Theme",
+    "themeDark": "Dark Mineral",
+    "themeWarm": "Warm Pearl"
   },
   "admin": {
     "title": "Operations",

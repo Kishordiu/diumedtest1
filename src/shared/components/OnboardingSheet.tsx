@@ -25,7 +25,7 @@ export function OnboardingSheet({ isOpen, onClose, title, subtitle, steps, ctaTe
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-backdrop"
+            className="fixed inset-0 bg-base/80 backdrop-blur-sm z-backdrop"
           />
           <motion.div
             initial={{ y: '100%' }}
@@ -35,7 +35,7 @@ export function OnboardingSheet({ isOpen, onClose, title, subtitle, steps, ctaTe
             className="fixed bottom-0 left-0 right-0 bg-surface rounded-t-[32px] p-6 pb-[calc(var(--safe-bottom)+24px)] z-sheet shadow-[var(--shadow-subtle)] border-t border-t-[var(--glass-border)] flex flex-col transition-colors duration-500"
             style={{ maxHeight: 'calc(100dvh - var(--safe-top) - 16px)' }}
           >
-            <div className="w-12 h-1.5 bg-black/10 dark:bg-white/10 rounded-full mx-auto mb-6 shrink-0" />
+            <div className="w-12 h-1.5 bg-black/10 dark:bg-[var(--glass-surface)] rounded-full mx-auto mb-6 shrink-0" />
             
             <div className="overflow-y-auto no-scrollbar flex-1 -mx-6 px-6">
             

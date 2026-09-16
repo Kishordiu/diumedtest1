@@ -31,7 +31,7 @@ export default function BottomNav() {
             `flex-1 flex flex-col items-center justify-center py-2 gap-1 transition-colors duration-150 min-h-[56px] ${
               isActive
                 ? 'text-signal-teal'
-                : 'text-muted-slate hover:text-stone active:text-warm-pearl'
+                : 'text-secondary hover:text-primary active:text-primary'
             }`
           }
           aria-label={t(labelKey)}

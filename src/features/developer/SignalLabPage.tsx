@@ -126,9 +126,9 @@ export default function SignalLabPage() {
   const fmt = (v: number | null | undefined, dp = 2) => v != null ? v.toFixed(dp) : '--'
 
   return (
-    <div className="min-h-full bg-mineral-black text-stone flex flex-col pb-4" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+    <div className="min-h-full bg-mineral-black text-muted flex flex-col pb-4" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 pt-3 pb-3 bg-mineral-black z-10 border-b border-white/5">
+      <div className="flex items-center gap-3 px-4 pt-3 pb-3 bg-mineral-black z-10 border-b border-[var(--glass-border)]">
         <button onClick={() => { stop(); navigate(-1) }} className="text-muted-slate"><ArrowLeft size={18} /></button>
         <div className="flex-1">
           <h1 className="text-warm-pearl font-semibold text-base">Signal Lab</h1>
@@ -143,7 +143,7 @@ export default function SignalLabPage() {
       <div className="flex gap-2 px-4 py-3">
         {(['rppg', 'contact_ppg'] as LabMode[]).map(m => (
           <button key={m} onClick={() => { stop(); setMode(m) }}
-            className={`flex-1 py-2 rounded-lg text-xs font-mono uppercase tracking-wider transition-colors ${mode === m ? 'bg-signal-teal/20 text-signal-teal border border-signal-teal/30' : 'bg-white/5 text-muted-slate border border-white/5'}`}>
+            className={`flex-1 py-2 rounded-lg text-xs font-mono uppercase tracking-wider transition-colors ${mode === m ? 'bg-signal-teal/20 text-signal-teal border border-signal-teal/30' : 'bg-[var(--glass-surface)] text-muted-slate border border-[var(--glass-border)]'}`}>
             {m === 'rppg' ? 'Bio-Aura (rPPG)' : 'Pulse Touch (cPPG)'}
           </button>
         ))}
@@ -162,11 +162,11 @@ export default function SignalLabPage() {
 
       {/* Video + Canvas */}
       <div className="px-4 mb-3">
-        <div className="relative bg-black rounded-xl overflow-hidden h-40 border border-white/5">
+        <div className="relative bg-black rounded-xl overflow-hidden h-40 border border-[var(--glass-border)]">
           <video ref={videoRef} className={`w-full h-full object-cover ${mode === 'rppg' ? '-scale-x-100' : ''}`} playsInline muted disablePictureInPicture />
           <canvas ref={canvasRef} className="hidden" />
           {!isRunning && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+            <div className="absolute inset-0 flex items-center justify-center bg-base/80">
               <p className="text-muted-slate text-xs font-mono">Camera inactive</p>
             </div>
           )}
@@ -177,7 +177,7 @@ export default function SignalLabPage() {
       {result && (
         <div className="px-4 mb-3">
           <p className="text-[9px] text-muted-slate font-mono mb-1 uppercase tracking-wider">Filtered PPG Waveform</p>
-          <div className="h-14 bg-deep-graphite rounded-lg border border-white/5 overflow-hidden">
+          <div className="h-14 bg-deep-graphite rounded-lg border border-[var(--glass-border)] overflow-hidden">
             <LiveSignalGraph waveform={result.waveform} color="#57B9A7" height={56} />
           </div>
         </div>
