@@ -43,10 +43,9 @@ export interface FacePatch {
 export interface RppgSample {
   timestamp: number;  // ms
   motionScore: number;
-  faceDetected?: boolean;
-  patches?: FacePatch[];
-  // Optional whole-frame RGB values are accepted for robustness tests and
-  // low-level callers. The production multi-ROI path still requires patches.
+  faceDetected: boolean;
+  patches: FacePatch[];
+  // Optional whole-frame RGB values are supported by the contact-PPG path.
   r?: number;
   g?: number;
   b?: number;
