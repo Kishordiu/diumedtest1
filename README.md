@@ -1,61 +1,61 @@
-# DiuMed
+# DIUMED
 
-DiuMed is a mobile-first health-tech prototype exploring camera-based wellness signals, symptom guidance and privacy-aware flows using a phone's built-in capabilities.
+![Cinematic hero](https://capsule-render.vercel.app/api?type=rect&color=0:07120E,100:17342A&height=230&text=DIUMED&fontColor=F3F3EE&fontSize=40&fontAlignY=38&desc=HEALTH-TECH%20%2F%20PRIVATE%20COMPUTATION&descColor=999991&descSize=12&descAlignY=66&animation=scaleIn)
 
-> **Safety note:** DiuMed is an experimental prototype, not a medical device or diagnostic service. Do not use its outputs to diagnose a condition or delay professional care.
+> **Health-tech / privacy-aware smartphone prototype.**
 
-## Project scope
+DiuMed explores whether everyday smartphone capabilities can support preliminary wellness signals and symptom guidance without requiring dedicated hardware.
 
-- Mobile-friendly progressive web app
-- Camera-based signal-estimation experiments
-- Guided symptom and wellness flows
-- Local-first interaction concepts and emergency-contact handoff
-- Supabase integration boundary for configured data workflows
-- Capacitor Android project
+## THE EXPERIENCE
 
-Features may be at different stages of implementation; use the source and tests for the current behaviour rather than interpreting the project description as clinical validation.
+- Mobile-first flows for camera-based signal experiments and guided triage
+- Local-first interaction concepts with explicit data-boundary considerations
+- Optional Supabase integration for application data
 
-## Run locally
+Review the current source for the exact implementation. Browser-based measurements and prototype scores must not be interpreted as clinically validated readings.
 
-**Requirements:** Node.js 20+ and npm.
+## STACK
+
+React · TypeScript · Vite · Capacitor · MediaPipe · Supabase · Vitest · Playwright
+
+## RUN LOCALLY
+
+Requirements: Node.js and npm.
 
 ```bash
 npm ci
 cp .env.example .env.local
+```
+
+Fill in the Supabase URL and publishable/anon key in `.env.local`, then start the web app:
+
+```bash
 npm run dev
 ```
 
-Set your own values in `.env.local`:
-
-| Variable | Purpose |
-| --- | --- |
-| `VITE_SUPABASE_URL` | Supabase project URL |
-| `VITE_SUPABASE_ANON_KEY` | Public anon/publishable client key |
-
-Vite variables are visible in the browser bundle. Do not place service-role keys or other private credentials in `VITE_*` values, and ensure Supabase Row Level Security (RLS) is configured for exposed data.
-
-## Quality checks
+For a production build and type check:
 
 ```bash
 npm run build
 npm run typecheck
-npm run test:unit
 ```
 
-Playwright end-to-end tests are configured separately. Install the required browser before running them:
+Unit and browser tests:
 
 ```bash
-npx playwright install
+npm run test:unit
 npm run test:e2e
 ```
 
-## Android
+For Android packaging, follow the Capacitor Android project instructions in the `android/` directory and build with the Android toolchain. The committed debug APK is a generated artifact, not the source of truth; verify its version before distributing it.
 
-The `android/` directory contains the Capacitor Android project. Follow the project's installed Capacitor/Android tooling to sync and build from source; a previously generated debug APK is not treated as a production release artifact.
+## ENVIRONMENT AND PRIVACY
 
-## Stack
+The `.env.example` file contains placeholders. Never commit local `.env` files, service-role keys or provider secrets. Any key prefixed with `VITE_` is bundled for browser access and must be limited to intended public credentials. Enforce access through backend authorization and Supabase Row Level Security.
 
-React · TypeScript · Vite · Capacitor · Supabase · MediaPipe Tasks Vision · Dexie · Vitest · Playwright
+## PROJECT STATUS
+
+**Experimental health-tech prototype. Not a medical device and not a substitute for professional care.**
 
 ---
 Maintained by [K. Kishor Kumar](https://github.com/Kishordiu).
