@@ -1,36 +1,14 @@
 /**
- * DiuMed Hemoglobin Estimator v2.0
- * 
- * MODEL PROVENANCE:
- * This is a genuinely trained DiuMed model using an openly available research dataset.
- * 
- * DATASET:
- * Source: Zhao L, Jay G (2023). "Prediction of Severe Anemia in Real-Time using a 
- * Smartphone Camera Application Processing Conjunctival Images" (Zenodo).
- * DOI: 10.5281/zenodo.8277462
- * License: Open access data associated with PLOS ONE publications.
- * 
- * TRAINING METHODOLOGY:
- * - Total sample count: N=426 valid rows (with HBl and HHR).
- * - Split: 80% Train (N=340), 20% Test (N=86), random_state=42.
- * - Model: Univariate ordinary least squares (OLS) linear regression.
- * - Feature: Average High Hue Ratio (HHR) -> `Actual Hgb (HBl) g/dL`.
- * 
- * DIUMED TEST SET PERFORMANCE (N=86):
- * - MAE: 1.66 g/dL
- * - RMSE: 2.09 g/dL
- * - Bias: 0.23 g/dL
- * - Bland-Altman LOA: -3.86 to +4.31 g/dL
- * 
- * PUBLISHED REFERENCE PERFORMANCE (Zhao et al. 2024, PLOS ONE):
- * - Bias: 0.10 g/dL
- * - Bland-Altman LOA: -4.73 to +4.93 g/dL
- * 
- * LIMITATIONS:
- * - This model is trained on a convenience sample of ED patients.
- * - Smartphone JPEG compression introduces variance not present in the RAW training data.
- * - Cross-device calibration has not been performed.
- * - This is an EXPERIMENTAL SCREENING tool, NOT a diagnostic.
+ * DiuMed hemoglobin estimator — experimental edge-model prototype.
+ *
+ * The current runtime uses the local `hb_estimator` weights in
+ * `src/shared/ml/model_weights.json`. Repository history and the current
+ * implementation do not establish a reproducible training run or independent
+ * validation for those exact weights. A referenced research DOI is not proof
+ * that these weights were trained or validated against that dataset.
+ *
+ * This output is an experimental demonstration only, not a medical measurement.
+ * Do not use it to diagnose, rule out, or make treatment decisions about anemia.
  */
 
 import type { ColorimetryResult } from './ColorimetryEngine'
@@ -61,10 +39,10 @@ export interface HemoglobinEstimate {
     coefficients: Record<string, number>
     features: Record<string, number>
     validation: {
-      mae: number
-      rmse: number
-      loaLower: number
-      loaUpper: number
+      mae: number | null
+      rmse: number | null
+      loaLower: number | null
+      loaUpper: number | null
       n: number
     }
   }
@@ -147,7 +125,7 @@ export function extractConjunctivaFeatures(imageData: ImageData, cx: number, cy:
 
 import { predictLinear } from '../../shared/ml/EdgeInference'
 
-const MODEL_VERSION = '3.0.0-ML'
+const MODEL_VERSION = '0.1.0-prototype'
 const MODEL_NAME = 'diumed_hb_edge_ml'
 
 // ─── Hb Estimation ──────────────────────────────────────────────
@@ -164,16 +142,18 @@ export function estimateHemoglobin(
       status: 'ACTIVE' as const,
       license: 'DiuMed Open Source',
       limitations: [
-        'Experimental screening only — not a laboratory measurement.',
+        'Experimental prototype only — not a laboratory measurement.',
+        'The embedded development weights do not have verified independent clinical validation.',
+        'Do not use the estimate to diagnose, rule out, or treat a health condition.',
         'Not FDA/CE validated.'
       ]
     },
     provenance: {
-      method: 'Scikit-Learn Linear/Ridge Regression (Edge Inference)',
-      datasetDoi: '10.5281/zenodo.8277462 (Simulated Kaggle Proxy)',
-      coefficients: {}, // Encapsulated in model_weights.json
+      method: 'Local linear inference using embedded development weights; not independently validated',
+      datasetDoi: 'Reference only: 10.5281/zenodo.8277462. Current weights use a simulated proxy; their training provenance is not verified.',
+      coefficients: {}, // Runtime weights are stored in model_weights.json; training provenance is not verified.
       features: {},
-      validation: { mae: 1.20, rmse: 1.50, loaLower: -2.5, loaUpper: 2.5, n: 5000 }
+      validation: { mae: null, rmse: null, loaLower: null, loaUpper: null, n: 0 }
     }
   }
 
@@ -189,7 +169,7 @@ export function estimateHemoglobin(
 
   const { highHueRatio } = conjunctivaFeatures
 
-  // Use the professionally validated High Hue Ratio as the sole feature for the Edge ML linear model
+  // Use HHR as the prototype model input; the current embedded weights are not clinically validated.
   const rawHb = predictLinear('hb_estimator', [highHueRatio])
 
   // Explicit validity check without silent clamping
@@ -209,9 +189,8 @@ export function estimateHemoglobin(
 
   const estimatedHb = rawHb
 
-  // Uncertainty from our test set RMSE (~2.1 g/dL) or LOA
-  // Let's use the max absolute LOA from our test set for honest bounds
-  const uncertainty = 4.3 
+  // No validated uncertainty estimate is available for the current embedded weights.
+  const uncertainty = null 
 
   let screeningSignal: HemoglobinEstimate['screeningSignal']
   if (estimatedHb < 7.0) {
