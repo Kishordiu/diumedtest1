@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { estimateHemoglobin, extractConjunctivaFeatures, type ConjunctivaFeatures } from '../../src/features/vision/HemoglobinEstimator'
 
-describe('HemoglobinEstimator v2', () => {
+describe('HemoglobinEstimator edge prototype', () => {
   const dummyColorimetry = {
     averageRGB: { r: 180, g: 100, b: 80 },
     averageLab: { L: 50, a: 30, b: 20 },
@@ -13,7 +13,7 @@ describe('HemoglobinEstimator v2', () => {
     const result = estimateHemoglobin(dummyColorimetry)
     expect(result.estimatedHb).toBeNull()
     expect(result.screeningSignal).toBe('INSUFFICIENT_QUALITY')
-    expect(result.modelInfo.name).toBe('diumed_hhr_univariate_v2')
+    expect(result.modelInfo.name).toBe('diumed_hb_edge_ml')
   })
 
   it('returns INSUFFICIENT_QUALITY when pixel count is too low', () => {
@@ -36,39 +36,37 @@ describe('HemoglobinEstimator v2', () => {
     expect(result.modelInfo.status).toBe('INVALID_INPUT')
   })
 
-  it('produces a real Hb estimate for valid conjunctiva features', () => {
-    // Healthy conjunctiva: deeply red, low high-hue ratio
+  it('returns a deterministic prototype output for valid feature input without asserting clinical accuracy', () => {
+    // Synthetic feature fixture only; this is not a clinical test or a healthy-patient prediction.
     const healthyFeatures: ConjunctivaFeatures = {
       highHueRatio: 0.15,
       pixelCount: 5000
     }
     const result = estimateHemoglobin(dummyColorimetry, healthyFeatures)
     expect(result.estimatedHb).not.toBeNull()
-    // Hb = 5.815 + 7.593 * 0.15 ≈ 6.95
-    expect(result.estimatedHb).toBeGreaterThan(6.0)
-    expect(result.estimatedHb).toBeLessThan(8.0)
+    // Current embedded weights: 4.4772270519 + 8.9942135720 * 0.15 ≈ 5.8.
+    expect(result.estimatedHb).toBe(5.8)
     expect(result.modelInfo.status).toBe('ACTIVE')
-    expect(result.modelInfo.name).toBe('diumed_hhr_univariate_v2')
+    expect(result.modelInfo.name).toBe('diumed_hb_edge_ml')
   })
 
-  it('verifies model provenance and coefficients are traceable', () => {
+  it('does not claim training coefficients or validation metrics that are not established', () => {
     const features: ConjunctivaFeatures = {
       highHueRatio: 0.5,
       pixelCount: 5000
     }
     const result = estimateHemoglobin(dummyColorimetry, features)
-    
-    // Explicitly verify the model provenance matching our training output
-    expect(result.provenance.datasetDoi).toBe('10.5281/zenodo.8277462')
-    expect(result.provenance.method).toBe('Univariate OLS Linear Regression on HHR')
-    
-    // Verify coefficients match the DiuMed training script output exactly
-    expect(result.provenance.coefficients.beta0_intercept).toBeCloseTo(5.8154597370440495)
-    expect(result.provenance.coefficients.beta1_hhr).toBeCloseTo(7.592921035710115)
-    
-    // Verify validation metrics are reported honestly
-    expect(result.provenance.validation.loaLower).toBe(-3.86)
-    expect(result.provenance.validation.loaUpper).toBe(4.31)
+
+    expect(result.provenance.method).toContain('not independently validated')
+    expect(result.provenance.datasetDoi).toContain('Reference only')
+    expect(Object.keys(result.provenance.coefficients)).toHaveLength(0)
+    expect(result.provenance.validation.mae).toBeNull()
+    expect(result.provenance.validation.rmse).toBeNull()
+    expect(result.provenance.validation.loaLower).toBeNull()
+    expect(result.provenance.validation.loaUpper).toBeNull()
+    expect(result.provenance.validation.n).toBe(0)
+    expect(result.provenance.features.highHueRatio).toBe(0.5)
+    expect(result.provenance.features.rawEstimate).toBeCloseTo(8.97, 2)
   })
 
   it('runs an end-to-end fixture ensuring displayed Hb comes from the exact HHR inference path', () => {
@@ -81,13 +79,13 @@ describe('HemoglobinEstimator v2', () => {
     // 2. Regression + 3. Hb Result
     const result = estimateHemoglobin(dummyColorimetry, e2eFeatures)
     
-    // Exact expected value: 5.8154597370440495 + (7.592921035710115 * 0.25)
-    const exactMath = 5.8154597370440495 + (7.592921035710115 * 0.25)
+    // Current development weights: 4.4772270519 + (8.9942135720 * 0.25).
+    const exactMath = 4.477227051942548 + (8.994213571973638 * 0.25)
     const expectedRounded = Math.round(exactMath * 10) / 10
 
     // 4. Verification
     expect(result.estimatedHb).toBe(expectedRounded)
-    expect(result.estimatedHb).toBe(7.7) // 7.7136... rounded to 1 decimal place
+    expect(result.estimatedHb).toBe(6.7) // Deterministic output of the current embedded prototype weights.
 
     // 5. Provenance tracking ensures we can save and retrieve this record accurately
     expect(result.provenance.features.highHueRatio).toBe(0.25)
