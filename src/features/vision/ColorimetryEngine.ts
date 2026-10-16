@@ -178,7 +178,7 @@ export function validateImageQuality(imageData: ImageData): ImageQualityReport {
   const contrast = Math.sqrt(sumVariance / count);
 
   if (clippedRatio > 0.05) {
-    return { isSufficient: false, brightness: meanBrightness, contrast, reason: 'Too much glare (specular reflection). Please adjust lighting.' };
+    return { isSufficient: false, brightness: meanBrightness, contrast, reason: 'Image is overexposed due to clipped highlights/specular glare. Please adjust lighting.' };
   }
   if (meanBrightness < 60) {
     return { isSufficient: false, brightness: meanBrightness, contrast, reason: 'Image is too dark. Please move to a well-lit area.' };
