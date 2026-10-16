@@ -1,37 +1,61 @@
-# DIUMED
+# DiuMed
 
-![Cinematic hero](https://capsule-render.vercel.app/api?type=rect&color=0:07120E,100:17342A&height=230&text=DIUMED&fontColor=F3F3EE&fontSize=40&fontAlignY=38&desc=HEALTH-TECH%20%2F%20PRIVATE%20COMPUTATION&descColor=999991&descSize=12&descAlignY=66&animation=scaleIn)
+DiuMed is a mobile-first health-tech prototype exploring camera-based wellness signals, symptom guidance and privacy-aware flows using a phone's built-in capabilities.
 
-> **HEALTH-TECH / PRIVATE COMPUTATION.**
+> **Safety note:** DiuMed is an experimental prototype, not a medical device or diagnostic service. Do not use its outputs to diagnose a condition or delay professional care.
 
-## THE PREMISE
+## Project scope
 
-DiuMed explores whether everyday smartphone capabilities can support preliminary wellness signals and symptom guidance without requiring dedicated hardware.
+- Mobile-friendly progressive web app
+- Camera-based signal-estimation experiments
+- Guided symptom and wellness flows
+- Local-first interaction concepts and emergency-contact handoff
+- Supabase integration boundary for configured data workflows
+- Capacitor Android project
 
-## THE EXPERIENCE
+Features may be at different stages of implementation; use the source and tests for the current behaviour rather than interpreting the project description as clinical validation.
 
-**DiuMed explores whether everyday smartphone capabilities can support preliminary wellness signals and symptom guidance without requiring dedicated hardware.**
+## Run locally
 
-## THE SYSTEM
-
-Start with the phone already in the user's hand. | Keep the data boundary visible. | Never confuse a prototype signal with a clinical measurement.
-
-## THE STACK
-
-The current PWA combines camera-based pulse-estimation concepts, AI-assisted guidance, local-first flows, emergency-contact handoff and a Supabase integration boundary.
-
-## RUN
+**Requirements:** Node.js 20+ and npm.
 
 ```bash
-Experimental health-tech prototype
+npm ci
+cp .env.example .env.local
+npm run dev
 ```
 
-## PROJECT STATE
+Set your own values in `.env.local`:
 
-**React · TypeScript · Vite · Tailwind CSS · Framer Motion · Supabase · Workbox PWA**
+| Variable | Purpose |
+| --- | --- |
+| `VITE_SUPABASE_URL` | Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | Public anon/publishable client key |
 
-This README intentionally distinguishes implemented behaviour from future integrations so the project can evolve without overstating what exists today.
+Vite variables are visible in the browser bundle. Do not place service-role keys or other private credentials in `VITE_*` values, and ensure Supabase Row Level Security (RLS) is configured for exposed data.
+
+## Quality checks
+
+```bash
+npm run build
+npm run typecheck
+npm run test:unit
+```
+
+Playwright end-to-end tests are configured separately. Install the required browser before running them:
+
+```bash
+npx playwright install
+npm run test:e2e
+```
+
+## Android
+
+The `android/` directory contains the Capacitor Android project. Follow the project's installed Capacitor/Android tooling to sync and build from source; a previously generated debug APK is not treated as a production release artifact.
+
+## Stack
+
+React · TypeScript · Vite · Capacitor · Supabase · MediaPipe Tasks Vision · Dexie · Vitest · Playwright
 
 ---
-
-<p align="center"><strong>K. KISHOR KUMAR</strong><br><sub>ENGINEERING / PRODUCT / SYSTEMS</sub></p>
+Maintained by [K. Kishor Kumar](https://github.com/Kishordiu).
