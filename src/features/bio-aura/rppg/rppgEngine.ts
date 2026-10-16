@@ -43,8 +43,13 @@ export interface FacePatch {
 export interface RppgSample {
   timestamp: number;  // ms
   motionScore: number;
-  faceDetected: boolean;
-  patches: FacePatch[];
+  faceDetected?: boolean;
+  patches?: FacePatch[];
+  // Optional whole-frame RGB values are accepted for robustness tests and
+  // low-level callers. The production multi-ROI path still requires patches.
+  r?: number;
+  g?: number;
+  b?: number;
 }
 
 export interface PipelineDiagnostics {
@@ -370,12 +375,15 @@ export function processRppgBuffer(samples: RppgSample[]): RppgResult {
   const patchesById: Record<string, { r: number[], g: number[], b: number[] }> = {}
   
   samples.forEach(s => {
+    // Older unit fixtures or incomplete camera frames may not contain an ROI.
+    // Treat them as missing signal instead of throwing or fabricating a BPM.
+    if (!Array.isArray(s.patches)) return;
     s.patches.forEach(p => {
-       if (!patchesById[p.id]) patchesById[p.id] = { r: [], g: [], b: [] };
-       patchesById[p.id].r.push(p.r);
-       patchesById[p.id].g.push(p.g);
-       patchesById[p.id].b.push(p.b);
-    })
+      if (!patchesById[p.id]) patchesById[p.id] = { r: [], g: [], b: [] };
+      patchesById[p.id].r.push(p.r);
+      patchesById[p.id].g.push(p.g);
+      patchesById[p.id].b.push(p.b);
+    });
   })
 
   const patchKeys = Object.keys(patchesById)
