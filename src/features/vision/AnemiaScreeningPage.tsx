@@ -258,8 +258,8 @@ export default function AnemiaScreeningPage() {
                     <span>{hbEstimate.provenance.method}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted">Training Data</span>
-                    <span>DOI: {hbEstimate.provenance.datasetDoi} (n={hbEstimate.provenance.validation.n})</span>
+                    <span className="text-muted">Evidence status</span>
+                    <span className="text-right max-w-[70%]">{hbEstimate.provenance.datasetDoi}</span>
                   </div>
                   {hbEstimate.provenance.features && Object.keys(hbEstimate.provenance.features).length > 0 && (
                     <div className="pt-2 mt-2 border-t border-[var(--glass-border)]">
@@ -272,6 +272,10 @@ export default function AnemiaScreeningPage() {
                       ))}
                     </div>
                   )}
+                  <div className="flex justify-between">
+                    <span className="text-muted">Independent validation</span>
+                    <span>{hbEstimate.provenance.validation.n > 0 ? `n=${hbEstimate.provenance.validation.n}` : 'Not established'}</span>
+                  </div>
                 </div>
               </div>
 
