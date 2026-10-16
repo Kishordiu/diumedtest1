@@ -93,6 +93,6 @@ describe('HemoglobinEstimator edge prototype', () => {
     
     // 6. Final status ensures the system considers this EXPERIMENTAL / RESEARCH-DERIVED
     expect(result.modelInfo.status).toBe('ACTIVE')
-    expect(result.modelInfo.name).toBe('diumed_hhr_univariate_v2')
+    expect(result.modelInfo.name).toBe('diumed_hb_edge_ml')
   })
 })
