@@ -249,11 +249,30 @@ export function processPulseTouchBuffer(samples: RppgSample[]): RppgResult {
     return createFailedResult(frameCount, durationSeconds, samplingRate, `Sampling rate too low (${samplingRate.toFixed(1)} fps)`)
   }
 
-  const patchData = samples.map(s => s.patches[0])
-  
+  // Production capture samples normally provide an ROI patch. Allow RGB-only
+  // samples in tests/legacy callers, but fail closed if neither form is present.
+  const hasUsableSignal = samples.every((sample) =>
+    (Array.isArray(sample.patches) && sample.patches.length > 0) ||
+    (Number.isFinite(sample.r) && Number.isFinite(sample.g) && Number.isFinite(sample.b))
+  )
+  if (!hasUsableSignal) {
+    return createFailedResult(frameCount, durationSeconds, samplingRate, 'No valid patch or RGB data in buffer')
+  }
+
+  const patchData = samples.map(s => s.patches?.[0] ?? {
+    r: s.r as number,
+    g: s.g as number,
+    b: s.b as number
+  })
+
   const meanR = patchData.reduce((sum, p) => sum + p.r, 0) / frameCount
   const meanG = patchData.reduce((sum, p) => sum + p.g, 0) / frameCount
 
+  // Contact PPG needs a dominant red channel. Green-dominant frames typically
+  // indicate ambient light rather than finger-over-flash capture.
+  if (meanG > meanR * 1.5) {
+    return createFailedResult(frameCount, durationSeconds, samplingRate, 'Poor finger contact detected (red channel is not dominant)')
+  }
   if (meanR < 40) {
     return createFailedResult(frameCount, durationSeconds, samplingRate, 'Poor finger contact detected (too dark)')
   }
