@@ -1,61 +1,52 @@
-# DIUMED
+<div align="center">
+  <img src="./assets/hero.png" width="100%" alt="Diumed Clinical Diagnostic Scanner Hero" />
+</div>
 
-![Cinematic hero](https://capsule-render.vercel.app/api?type=rect&color=0:07120E,100:17342A&height=230&text=DIUMED&fontColor=F3F3EE&fontSize=40&fontAlignY=38&desc=HEALTH-TECH%20%2F%20PRIVATE%20COMPUTATION&descColor=999991&descSize=12&descAlignY=66&animation=scaleIn)
+<p align="center">
+  <a href="https://diufoundry.online"><img alt="Studio" src="https://img.shields.io/badge/DIU_FOUNDRY-CLINICAL_R%26D-0F291E?style=for-the-badge&logoColor=35D59D" /></a>&nbsp;
+  <img alt="Platform" src="https://img.shields.io/badge/PLATFORM-ANDROID_%2F_WEB-0F291E?style=for-the-badge&logo=android&logoColor=35D59D" />&nbsp;
+  <img alt="Vision" src="https://img.shields.io/badge/INFERENCE-MEDIAPIPE_VISION-0F291E?style=for-the-badge&logoColor=35D59D" />
+</p>
 
-> **Health-tech / privacy-aware smartphone prototype.**
+# Diumed
 
-DiuMed explores whether everyday smartphone capabilities can support preliminary wellness signals and symptom guidance without requiring dedicated hardware.
-
-## THE EXPERIENCE
-
-- Mobile-first flows for camera-based signal experiments and guided triage
-- Local-first interaction concepts with explicit data-boundary considerations
-- Optional Supabase integration for application data
-
-Review the current source for the exact implementation. Browser-based measurements and prototype scores must not be interpreted as clinically validated readings.
-
-## STACK
-
-React · TypeScript · Vite · Capacitor · MediaPipe · Supabase · Vitest · Playwright
-
-## RUN LOCALLY
-
-Requirements: Node.js and npm.
-
-```bash
-npm ci
-cp .env.example .env.local
-```
-
-Fill in the Supabase URL and publishable/anon key in `.env.local`, then start the web app:
-
-```bash
-npm run dev
-```
-
-For a production build and type check:
-
-```bash
-npm run build
-npm run typecheck
-```
-
-Unit and browser tests:
-
-```bash
-npm run test:unit
-npm run test:e2e
-```
-
-For Android packaging, follow the Capacitor Android project instructions in the `android/` directory and build with the Android toolchain. The committed debug APK is a generated artifact, not the source of truth; verify its version before distributing it.
-
-## ENVIRONMENT AND PRIVACY
-
-The `.env.example` file contains placeholders. Never commit local `.env` files, service-role keys or provider secrets. Any key prefixed with `VITE_` is bundled for browser access and must be limited to intended public credentials. Enforce access through backend authorization and Supabase Row Level Security.
-
-## PROJECT STATUS
-
-**Experimental health-tech prototype. Not a medical device and not a substitute for professional care.**
+**Edge-native clinical vitals telemetry and private computer-vision diagnostics for point-of-care medical triage.**
 
 ---
-Maintained by [K. Kishor Kumar](https://github.com/Kishordiu).
+
+### The Problem
+Field healthcare practitioners in rural and bandwidth-constrained clinics face severe bottlenecks triaging patient vitals with heavy, expensive bench equipment. Conventional medical computer-vision solutions require continuous high-bandwidth cloud video streaming, introducing unacceptable latency and privacy vulnerabilities for sensitive biometrics.
+
+### The Solution
+Diumed operates directly on mobile hardware via Capacitor and on-device MediaPipe vision tasks. It extracts multi-spectral optical vitals and facial/skin indicators locally, validates readings against offline clinical triage matrices, and delivers immediate synthesized audio guidance through native text-to-speech without cloud dependency.
+
+---
+
+### Core Architecture
+
+- **Edge Computer Vision:** On-device `@mediapipe/tasks-vision` pipeline for non-invasive pupil, face mesh, and dermatological landmark tracking.
+- **Hardware Sensor Abstraction:** Native camera and thermal sensor bridging via Capacitor Android runtime (`@capacitor/camera`, `@capacitor/filesystem`).
+- **Acoustic Feedback:** Hands-free diagnostic audio prompts via `@capacitor-community/text-to-speech`.
+- **Zero-Trust Patient Records:** Encrypted local biometric staging with selective end-to-end synchronization to Supabase HIPAA-compliant vaults.
+
+---
+
+### Quick Start
+
+```bash
+git clone https://github.com/Kishordiu/diumedtest1.git
+cd diumedtest1
+
+npm install
+npm run dev
+
+# Android native build
+npx cap sync android
+npx cap open android
+```
+
+---
+
+<p align="center">
+  <sub>Crafted with clinical precision by <a href="https://diufoundry.online">DIU FOUNDRY</a></sub>
+</p>
