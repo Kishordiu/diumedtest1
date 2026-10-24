@@ -10,28 +10,28 @@
 
 # Diumed
 
-**Edge-native clinical vitals telemetry and private computer-vision diagnostics for point-of-care medical triage.**
+**An experimental mobile health-interface prototype exploring on-device vision workflows and accessible health-related interactions.**
 
 ---
 
 ### The Problem
-Field healthcare practitioners in rural and bandwidth-constrained clinics face severe bottlenecks triaging patient vitals with heavy, expensive bench equipment. Conventional medical computer-vision solutions require continuous high-bandwidth cloud video streaming, introducing unacceptable latency and privacy vulnerabilities for sensitive biometrics.
+This project explores how a mobile-first interface might support health-related workflows in settings with limited connectivity. The current repository should be treated as a software prototype, not as a validated clinical measurement system or a substitute for medical instruments.
 
 ### The Solution
-Diumed operates directly on mobile hardware via Capacitor and on-device MediaPipe vision tasks. It extracts multi-spectral optical vitals and facial/skin indicators locally, validates readings against offline clinical triage matrices, and delivers immediate synthesized audio guidance through native text-to-speech without cloud dependency.
+The codebase includes Capacitor and MediaPipe vision dependencies that can support camera and on-device vision experiments. Do not interpret any visual output as a clinically validated vital sign, diagnosis, or triage recommendation. Offline operation and data flow should be verified in the actual build before being represented as guaranteed behaviour.
 
 ---
 
 ### Core Architecture
 
-- **Edge Computer Vision:** On-device `@mediapipe/tasks-vision` pipeline for non-invasive pupil, face mesh, and dermatological landmark tracking.
-- **Hardware Sensor Abstraction:** Native camera and thermal sensor bridging via Capacitor Android runtime (`@capacitor/camera`, `@capacitor/filesystem`).
-- **Acoustic Feedback:** Hands-free diagnostic audio prompts via `@capacitor-community/text-to-speech`.
-- **Zero-Trust Patient Records:** Encrypted local biometric staging with selective end-to-end synchronization to Supabase HIPAA-compliant vaults.
+- **Vision experiments:** `@mediapipe/tasks-vision` is included for computer-vision exploration; its presence alone does not establish medically accurate measurement.
+- **Mobile integration:** Capacitor dependencies provide a foundation for native mobile integrations; confirm each device API is implemented and tested before relying on it.
+- **Accessibility exploration:** Text-to-speech can support spoken interface feedback when correctly integrated; it should not be presented as validated medical guidance.
+- **Data boundary:** Supabase is present as an application integration dependency. This README does not claim HIPAA compliance, end-to-end encryption, or a validated patient-record security model.
 
 ---
 
-### Quick Start
+### Safety, privacy, and prototype status\n\n**Not a medical device. Not validated for diagnosis, monitoring, or treatment.** Do not use the application or its outputs to make clinical decisions, and do not enter real patient or biometric information into an unreviewed development deployment. Before any real-world health use, the project would need independent clinical validation, security testing, consent and privacy review, and jurisdiction-specific regulatory/compliance assessment.\n\n### Quick Start
 
 ```bash
 git clone https://github.com/Kishordiu/diumedtest1.git
