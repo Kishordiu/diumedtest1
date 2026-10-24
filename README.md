@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/hero.png" width="100%" alt="Diumed Clinical Diagnostic Scanner Hero" />
+  <img src="./assets/hero.png" width="100%" alt="DiuMed — experimental mobile health interface" />
 </div>
 
 <p align="center">
