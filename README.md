@@ -31,7 +31,9 @@ The codebase includes Capacitor and MediaPipe vision dependencies that can suppo
 
 ---
 
-### Safety, privacy, and prototype status\n\n**Not a medical device. Not validated for diagnosis, monitoring, or treatment.** Do not use the application or its outputs to make clinical decisions, and do not enter real patient or biometric information into an unreviewed development deployment. Before any real-world health use, the project would need independent clinical validation, security testing, consent and privacy review, and jurisdiction-specific regulatory/compliance assessment.\n\n### Quick Start
+### Safety, privacy, and prototype status
+
+**Not a medical device. Not validated for diagnosis, monitoring, or treatment.** Do not use the application or its outputs to make clinical decisions, and do not enter real patient or biometric information into an unreviewed development deployment. Before any real-world health use, the project would need independent clinical validation, security testing, consent and privacy review, and jurisdiction-specific regulatory/compliance assessment.\n\n### Quick Start
 
 ```bash
 git clone https://github.com/Kishordiu/diumedtest1.git
@@ -48,5 +50,5 @@ npx cap open android
 ---
 
 <p align="center">
-  <sub>Crafted with clinical precision by <a href="https://diufoundry.online">DIU FOUNDRY</a></sub>
+  <sub>Experimental health-interface prototype by <a href="https://diufoundry.online">DIU FOUNDRY</a></sub>
 </p>
